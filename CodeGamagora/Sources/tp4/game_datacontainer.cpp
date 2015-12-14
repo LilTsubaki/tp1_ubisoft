@@ -54,7 +54,7 @@ bool MoveCharacterRequest::ReadFromNetworkData(uu::Reader& reader, uu::network::
 	if (reader.ReadFloat(_x) == false) return false;
 	if (reader.ReadFloat(_y) == false) return false;
 
-	Log(LogType::eTrace, LogModule::eDataContainer, true, "MoveCharacterRequest::ReadFromNetworkData _owner=%s\n", _owner.ToString());
+	Log(LogType::eTrace, LogModule::eDataContainer, true, "MoveCharacterRequest::ReadFromNetworkData \n");
 
 	return true;
 }
@@ -68,7 +68,7 @@ bool MoveCharacterRequest::WriteToNetworkData(uu::Writer& writer)
 	if (writer.WriteFloat(_x) == false) return false;
 	if (writer.WriteFloat(_y) == false) return false;
 
-	Log(LogType::eTrace, LogModule::eDataContainer, true, "MoveCharacterRequest::WriteToNetworkData _owner=%s\n", _owner.ToString());
+	Log(LogType::eTrace, LogModule::eDataContainer, true, "MoveCharacterRequest::WriteToNetworkData \n");
 
 	return true;
 }
