@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\Sources\tp4\main_game.cpp" />
+    <ClCompile Include="..\Sources\tp4\Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\game_datacontainer.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\AnimatedSprite.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\draw_ui.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\draw_utils.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\ini.c">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\session_datacontainer.cpp">
+      <Filter>Session</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\SessionService.cpp">
+      <Filter>Session</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\ClientService.cpp">
+      <Filter>Session</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\crc32.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\IPAddress.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\IPEndPoint.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\network.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\ResourceManager.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\tinyxml2.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\StringId.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\SpriteSheet.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\UdpClient.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\serializer.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\Win32Console.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\endianness.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\types.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\World.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\Log.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\Time.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\Character.cpp">
+      <Filter>Game\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\Player.cpp">
+      <Filter>Game\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\GameObjects.cpp">
+      <Filter>Game\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\Animable.cpp">
+      <Filter>Game\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\Item.cpp">
+      <Filter>Game\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\Entity.cpp">
+      <Filter>Game\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\Bomb.cpp">
+      <Filter>Game\Characters</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Sources\tp4\Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\game_datacontainer.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\AnimatedSprite.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\draw_utils.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\draw_ui.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\ini.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\session_datacontainer.h">
+      <Filter>Session</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\SessionService.h">
+      <Filter>Session</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\ClientService.h">
+      <Filter>Session</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\IPAddress.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\IPEndPoint.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\DataContainer.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\network.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\ResourceManager.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\tinyxml2.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\StringId.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\SpriteSheet.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\Maths.h">
+      <Filter>Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\Singleton.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\UdpClient.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\Vector2.h">
+      <Filter>Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\serializer.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\Win32Console.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\endianness.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\types.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\World.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\Log.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\Time.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\ObjectOrientation.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\Ellipse2.h">
+      <Filter>Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\Character.h">
+      <Filter>Game\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\Player.h">
+      <Filter>Game\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\Entity.h">
+      <Filter>Game\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\GameObjects.h">
+      <Filter>Game\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\Animable.h">
+      <Filter>Game\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\Item.h">
+      <Filter>Game\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\Bomb.h">
+      <Filter>Game\Characters</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Game">
+      <UniqueIdentifier>{e619b33d-4298-4ff2-a722-b6713f04407e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{614e75aa-1875-4ff1-8630-2093e936ba87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Session">
+      <UniqueIdentifier>{7a83d0e6-4e2c-47c3-97dd-978a4eba56a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{c704b796-ddb0-4ab0-a30f-a847468f2de4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{ae4ac8ed-6d49-463e-9626-14627ccba242}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{4eae4b72-314b-4c25-8128-aa3e282dcd01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Maths">
+      <UniqueIdentifier>{7d6a0466-2e83-4a39-97e2-fe4408e83751}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Characters">
+      <UniqueIdentifier>{1a7f4afa-3283-425c-962d-f7437c33ad05}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

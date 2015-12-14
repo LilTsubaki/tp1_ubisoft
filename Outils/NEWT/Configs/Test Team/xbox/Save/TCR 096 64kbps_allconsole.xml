@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Emulation xmlns="http://research.microsoft.com/asia">
+  <VirtualChannel name="VirtualChannel 1" DispatchType="packet">
+    <FilterList>
+
+      <Filter name="mdenis" not="0">
+        <PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+        <IpVersion>IPv4</IpVersion>
+        <Local>
+          <IpAddress>0.0.0.0</IpAddress>
+          <IpMask>0.0.0.0</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Local>
+        <Remote>
+          <IpAddress>192.168.70.2</IpAddress>
+          <IpMask>255.255.255.255</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Remote>
+      </Filter>
+
+      <Filter name="RemyB" not="0">
+        <PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+        <IpVersion>IPv4</IpVersion>
+        <Local>
+          <IpAddress>0.0.0.0</IpAddress>
+          <IpMask>0.0.0.0</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Local>
+        <Remote>
+          <IpAddress>192.168.68.2</IpAddress>
+          <IpMask>255.255.255.255</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Remote>
+      </Filter>
+
+      <Filter name="Sylvain" not="0">
+        <PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+        <IpVersion>IPv4</IpVersion>
+        <Local>
+          <IpAddress>0.0.0.0</IpAddress>
+          <IpMask>0.0.0.0</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Local>
+        <Remote>
+          <IpAddress>192.168.52.2</IpAddress>
+          <IpMask>255.255.255.255</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Remote>
+      </Filter>
+
+      <Filter name="emmanuel" not="0">
+        <PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+        <IpVersion>IPv4</IpVersion>
+        <Local>
+          <IpAddress>0.0.0.0</IpAddress>
+          <IpMask>0.0.0.0</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Local>
+        <Remote>
+          <IpAddress>192.168.92.2</IpAddress>
+          <IpMask>255.255.255.255</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Remote>
+      </Filter>
+
+      <Filter name="nico" not="0">
+        <PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+        <IpVersion>IPv4</IpVersion>
+        <Local>
+          <IpAddress>0.0.0.0</IpAddress>
+          <IpMask>0.0.0.0</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Local>
+        <Remote>
+          <IpAddress>192.168.232.2</IpAddress>
+          <IpMask>255.255.255.255</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Remote>
+      </Filter>
+
+      <Filter name="richard" not="0">
+        <PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+        <IpVersion>IPv4</IpVersion>
+        <Local>
+          <IpAddress>0.0.0.0</IpAddress>
+          <IpMask>0.0.0.0</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Local>
+        <Remote>
+          <IpAddress>192.168.207.2</IpAddress>
+          <IpMask>255.255.255.255</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Remote>
+      </Filter>
+
+      <Filter name="alban" not="0">
+        <PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+        <IpVersion>IPv4</IpVersion>
+        <Local>
+          <IpAddress>0.0.0.0</IpAddress>
+          <IpMask>0.0.0.0</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Local>
+        <Remote>
+          <IpAddress>192.168.227.2</IpAddress>
+          <IpMask>255.255.255.255</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Remote>
+      </Filter>
+
+      <Filter name="david" not="0">
+        <PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+        <IpVersion>IPv4</IpVersion>
+        <Local>
+          <IpAddress>0.0.0.0</IpAddress>
+          <IpMask>0.0.0.0</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Local>
+        <Remote>
+          <IpAddress>192.168.238.2</IpAddress>
+          <IpMask>255.255.255.255</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Remote>
+      </Filter>
+
+    </FilterList>
+    <VirtualLink name="LINK_1" instances="1">
+      <LinkRule dir="upstream">
+        <Bandwidth>
+          <Speed unit="kbps">64</Speed>
+          <QueueManagement>
+            <NormalQueue>
+              <Size>100</Size>
+              <QueueMode>packet</QueueMode>
+              <DropType>DropRandom</DropType>
+            </NormalQueue>
+          </QueueManagement>
+        </Bandwidth>
+      </LinkRule>
+      <LinkRule dir="downstream">
+        <Bandwidth>
+          <Speed unit="kbps">64</Speed>
+          <QueueManagement>
+            <NormalQueue>
+              <Size>100</Size>
+              <QueueMode>packet</QueueMode>
+              <DropType>DropRandom</DropType>
+            </NormalQueue>
+          </QueueManagement>
+        </Bandwidth>
+      </LinkRule>
+    </VirtualLink>
+  </VirtualChannel>
+</Emulation>

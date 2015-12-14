@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Emulation xmlns="http://research.microsoft.com/asia"><VirtualChannel name="VirtualChannel 5" DispatchType="packet"><FilterList/></VirtualChannel></Emulation>

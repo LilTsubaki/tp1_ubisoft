@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\Sources\tp1\main_memory.cpp" />
+    <ClCompile Include="..\Sources\tp1\utests_memory.cpp" />
+    <ClCompile Include="..\Sources\tp1\endianness.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp1\network.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp1\sizeof.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp1\types.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp1\Win32Console.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp1\utests.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Sources\tp1\endianness.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp1\network.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp1\types.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp1\Win32Console.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp1\utests.h">
+      <Filter>common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="common">
+      <UniqueIdentifier>{5bb918de-3a78-46d0-9067-5c209a4e5e32}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

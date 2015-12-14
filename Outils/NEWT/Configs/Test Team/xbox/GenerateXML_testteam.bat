@@ -1,0 +1,1 @@
+python newtconf.py blabla.txt

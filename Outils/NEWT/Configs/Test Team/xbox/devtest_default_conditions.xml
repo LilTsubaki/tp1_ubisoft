@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Emulation xmlns="http://research.microsoft.com/asia">
+	<VirtualChannel name="Remy" DispatchType="packet">
+		<FilterList>
+			<Filter name="Remy.filter" not="0">
+
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.92.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK Remy.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Latency>
+					<Fixed>
+						<Time unit="msec">150</Time>
+					</Fixed>
+				</Latency>
+				<Loss>
+					<Periodic>
+						<PerPackets>50</PerPackets>
+					</Periodic>
+				</Loss>
+			</LinkRule>
+			<LinkRule dir="downstream">
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="Mathieu" DispatchType="packet">
+		<FilterList>
+			<Filter name="Mathieu.filter" not="0">
+
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.227.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK Mathieu.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Latency>
+					<Fixed>
+						<Time unit="msec">150</Time>
+					</Fixed>
+				</Latency>
+				<Loss>
+					<Periodic>
+						<PerPackets>50</PerPackets>
+					</Periodic>
+				</Loss>
+			</LinkRule>
+			<LinkRule dir="downstream">
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="mat" DispatchType="packet">
+		<FilterList>
+			<Filter name="mat.filter" not="0">
+
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.201.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK mat.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Latency>
+					<Fixed>
+						<Time unit="msec">150</Time>
+					</Fixed>
+				</Latency>
+				<Loss>
+					<Periodic>
+						<PerPackets>50</PerPackets>
+					</Periodic>
+				</Loss>
+			</LinkRule>
+			<LinkRule dir="downstream">
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="Ju" DispatchType="packet">
+		<FilterList>
+			<Filter name="Ju.filter" not="0">
+
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.238.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK Ju.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Latency>
+					<Fixed>
+						<Time unit="msec">150</Time>
+					</Fixed>
+				</Latency>
+				<Loss>
+					<Periodic>
+						<PerPackets>50</PerPackets>
+					</Periodic>
+				</Loss>
+			</LinkRule>
+			<LinkRule dir="downstream">
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="diane" DispatchType="packet">
+		<FilterList>
+			<Filter name="diane.filter" not="0">
+
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.68.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK diane.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Latency>
+					<Fixed>
+						<Time unit="msec">150</Time>
+					</Fixed>
+				</Latency>
+				<Loss>
+					<Periodic>
+						<PerPackets>50</PerPackets>
+					</Periodic>
+				</Loss>
+			</LinkRule>
+			<LinkRule dir="downstream">
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="david" DispatchType="packet">
+		<FilterList>
+			<Filter name="david.filter" not="0">
+
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.207.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK david.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Latency>
+					<Fixed>
+						<Time unit="msec">150</Time>
+					</Fixed>
+				</Latency>
+				<Loss>
+					<Periodic>
+						<PerPackets>50</PerPackets>
+					</Periodic>
+				</Loss>
+			</LinkRule>
+			<LinkRule dir="downstream">
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="Kim" DispatchType="packet">
+		<FilterList>
+			<Filter name="Kim.filter" not="0">
+
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.112.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK Kim.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Latency>
+					<Fixed>
+						<Time unit="msec">150</Time>
+					</Fixed>
+				</Latency>
+				<Loss>
+					<Periodic>
+						<PerPackets>50</PerPackets>
+					</Periodic>
+				</Loss>
+			</LinkRule>
+			<LinkRule dir="downstream">
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="Syl" DispatchType="packet">
+		<FilterList>
+			<Filter name="Syl.filter" not="0">
+
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.232.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK Syl.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Latency>
+					<Fixed>
+						<Time unit="msec">150</Time>
+					</Fixed>
+				</Latency>
+				<Loss>
+					<Periodic>
+						<PerPackets>50</PerPackets>
+					</Periodic>
+				</Loss>
+			</LinkRule>
+			<LinkRule dir="downstream">
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="Man" DispatchType="packet">
+		<FilterList>
+			<Filter name="Man.filter" not="0">
+
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.70.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK Man.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Latency>
+					<Fixed>
+						<Time unit="msec">150</Time>
+					</Fixed>
+				</Latency>
+				<Loss>
+					<Periodic>
+						<PerPackets>50</PerPackets>
+					</Periodic>
+				</Loss>
+			</LinkRule>
+			<LinkRule dir="downstream">
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+
+</Emulation>

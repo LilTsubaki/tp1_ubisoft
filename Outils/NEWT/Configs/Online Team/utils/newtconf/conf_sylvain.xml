@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Emulation xmlns="http://research.microsoft.com/asia">
+	<VirtualChannel name="sylvain.eriksen" DispatchType="packet">
+		<FilterList>
+			<Filter name="sylvain.eriksen.filter" not="0">
+
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.108.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK sylvain.eriksen.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Latency>
+					<Fixed>
+						<Time unit="msec">150</Time>
+					</Fixed>
+				</Latency>
+				<Loss>
+					<Periodic>
+						<PerPackets>8</PerPackets>
+					</Periodic>
+				</Loss>
+			</LinkRule>
+			<LinkRule dir="downstream">
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+
+</Emulation>

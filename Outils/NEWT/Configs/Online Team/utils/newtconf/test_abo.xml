@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Emulation xmlns="http://research.microsoft.com/asia">
+	<VirtualChannel name="abo01" DispatchType="packet">
+		<FilterList>
+			<Filter name="abo01.filter" not="0">
+
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.113.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK abo01.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Bandwidth>
+					<Speed unit="kbps">128</Speed>
+
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">80</Min>
+						<Max unit="msec">100</Max>
+					</Uniform>
+				</Latency>
+				<Loss>
+					<Periodic>
+						<PerPackets>30</PerPackets>
+					</Periodic>
+				</Loss>
+			</LinkRule>
+			<LinkRule dir="downstream">
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="abo03" DispatchType="packet">
+		<FilterList>
+			<Filter name="abo03.filter" not="0">
+
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.222.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK abo03.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Bandwidth>
+					<Speed unit="kbps">128</Speed>
+
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">80</Min>
+						<Max unit="msec">100</Max>
+					</Uniform>
+				</Latency>
+				<Loss>
+					<Periodic>
+						<PerPackets>30</PerPackets>
+					</Periodic>
+				</Loss>
+			</LinkRule>
+			<LinkRule dir="downstream">
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="k47" DispatchType="packet">
+		<FilterList>
+			<Filter name="k47.filter" not="0">
+
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.132.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK k47.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Bandwidth>
+					<Speed unit="kbps">128</Speed>
+
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">80</Min>
+						<Max unit="msec">100</Max>
+					</Uniform>
+				</Latency>
+				<Loss>
+					<Periodic>
+						<PerPackets>30</PerPackets>
+					</Periodic>
+				</Loss>
+			</LinkRule>
+			<LinkRule dir="downstream">
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="abo02" DispatchType="packet">
+		<FilterList>
+			<Filter name="abo02.filter" not="0">
+
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.208.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK abo02.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Bandwidth>
+					<Speed unit="kbps">128</Speed>
+
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">80</Min>
+						<Max unit="msec">100</Max>
+					</Uniform>
+				</Latency>
+				<Loss>
+					<Periodic>
+						<PerPackets>30</PerPackets>
+					</Periodic>
+				</Loss>
+			</LinkRule>
+			<LinkRule dir="downstream">
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+
+</Emulation>

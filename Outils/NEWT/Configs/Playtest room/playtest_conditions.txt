@@ -1,0 +1,38 @@
+# =========================================================
+#
+# name(filename)
+# adapters([it0, it1, ...])
+#
+# upstream() -> the following parameters will apply to the upstream
+# downstream() -> the following parameters will apply to the downstream
+#
+# bw_filter(bw=-1, qsize=0, qmode='packet', qtype='DropTail') -> bandwith limit + queue settings
+# latency_filter(minlatency=0, maxlatency=0) -> min and max latency
+# error_filter(rate) -> error rate with max 1.0
+# loss_filter(rate) -> loss of one every 'rate' packets
+#
+#
+# add_console(name, ip, interface_idx)
+#
+# =========================================================
+
+name("playtest_configuration")
+adapters(['00-24-01-60-86-61', '00-14-22-5a-11-dc'])
+
+upstream()
+latency_filter(150)
+loss_filter(50)
+
+downstream()
+latency_filter(0)
+loss_filter(0)
+
+
+add_console('pt01', '192.168.98.2', 0)
+add_console('pt02', '192.168.250.2', 0)
+add_console('pt03', '192.168.224.2', 0)
+add_console('pt04', '192.168.57.2', 0)
+add_console('pt05', '192.168.64.2', 0)
+add_console('pt06', '192.168.107.2', 0)
+add_console('pt07', '192.168.240.2', 0)
+add_console('pt08', '192.168.155.2', 0)

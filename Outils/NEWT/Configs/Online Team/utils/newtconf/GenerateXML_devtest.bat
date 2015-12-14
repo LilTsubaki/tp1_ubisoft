@@ -1,0 +1,1 @@
+python newtconf.py devtest_default_conditions.txt

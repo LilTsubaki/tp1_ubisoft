@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Session">
+      <UniqueIdentifier>{7c9c63ae-bcea-4361-b8f5-7a0ee2a473d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common_tp1">
+      <UniqueIdentifier>{6a9102e4-7f58-4dd4-bb41-a599c71f617d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common_tp2">
+      <UniqueIdentifier>{863d3cdd-af06-451c-aa4b-77b2713ee74d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Sources\tp2\main_server.cpp" />
+    <ClCompile Include="..\Sources\tp2\common_datacontainer.cpp">
+      <Filter>Session</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp2\ServerService.cpp">
+      <Filter>Session</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp2\SessionService.cpp">
+      <Filter>Session</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp1\endianness.cpp">
+      <Filter>common_tp1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp1\network.cpp">
+      <Filter>common_tp1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp1\serializer.cpp">
+      <Filter>common_tp1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp1\types.cpp">
+      <Filter>common_tp1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp2\crc32.cpp">
+      <Filter>common_tp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp2\IPAddress.cpp">
+      <Filter>common_tp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp2\IPEndPoint.cpp">
+      <Filter>common_tp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp2\StringId.cpp">
+      <Filter>common_tp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp2\Time.cpp">
+      <Filter>common_tp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp2\UdpClient.cpp">
+      <Filter>common_tp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp1\Win32Console.cpp">
+      <Filter>common_tp1</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Sources\tp2\common_datacontainer.h">
+      <Filter>Session</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp2\ServerService.h">
+      <Filter>Session</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp2\SessionService.h">
+      <Filter>Session</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp1\endianness.h">
+      <Filter>common_tp1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp1\network.h">
+      <Filter>common_tp1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp1\serializer.h">
+      <Filter>common_tp1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp1\types.h">
+      <Filter>common_tp1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp2\DataContainer.h">
+      <Filter>common_tp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp2\IPAddress.h">
+      <Filter>common_tp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp2\IPEndPoint.h">
+      <Filter>common_tp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp2\StringId.h">
+      <Filter>common_tp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp2\Time.h">
+      <Filter>common_tp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp2\UdpClient.h">
+      <Filter>common_tp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp1\Win32Console.h">
+      <Filter>common_tp1</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

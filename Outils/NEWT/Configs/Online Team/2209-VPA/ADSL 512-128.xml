@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Emulation xmlns="http://research.microsoft.com/asia">
+  <VirtualChannel name="VirtualChannel 1" DispatchType="packet">
+    <FilterList>
+      <Filter name="XBOX 1" not="0">
+        <PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+        <IpVersion>IPv4</IpVersion>
+        <Local>
+          <IpAddress>0.0.0.0</IpAddress>
+          <IpMask>0.0.0.0</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Local>
+        <Remote>
+          <IpAddress>192.168.1.2</IpAddress>
+          <IpMask>255.255.255.255</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Remote>
+      </Filter>
+      <Filter name="XBOX 2" not="0">
+        <PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+        <IpVersion>IPv4</IpVersion>
+        <Local>
+          <IpAddress>0.0.0.0</IpAddress>
+          <IpMask>0.0.0.0</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Local>
+        <Remote>
+          <IpAddress>192.168.2.2</IpAddress>
+          <IpMask>255.255.255.255</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Remote>
+      </Filter>
+      <Filter name="PS3 1" not="0">
+        <PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+        <IpVersion>IPv4</IpVersion>
+        <Local>
+          <IpAddress>0.0.0.0</IpAddress>
+          <IpMask>0.0.0.0</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Local>
+        <Remote>
+          <IpAddress>192.168.1.3</IpAddress>
+          <IpMask>255.255.255.255</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Remote>
+      </Filter>
+      <Filter name="PS3 2" not="0">
+        <PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+        <IpVersion>IPv4</IpVersion>
+        <Local>
+          <IpAddress>0.0.0.0</IpAddress>
+          <IpMask>0.0.0.0</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Local>
+        <Remote>
+          <IpAddress>192.168.2.3</IpAddress>
+          <IpMask>255.255.255.255</IpMask>
+          <PortBegin>0</PortBegin>
+          <PortEnd>65535</PortEnd>
+        </Remote>
+      </Filter>
+    </FilterList>
+    <VirtualLink name="ADSL 512/128" instances="1">
+      <LinkRule dir="upstream">
+        <Bandwidth>
+          <Speed unit="kbps">128</Speed>
+          <QueueManagement>
+            <NormalQueue>
+              <Size>100</Size>
+              <QueueMode>packet</QueueMode>
+              <DropType>DropTail</DropType>
+            </NormalQueue>
+          </QueueManagement>
+        </Bandwidth>
+      </LinkRule>
+      <LinkRule dir="downstream">
+        <Bandwidth>
+          <Speed unit="kbps">512</Speed>
+          <QueueManagement>
+            <NormalQueue>
+              <Size>100</Size>
+              <QueueMode>packet</QueueMode>
+              <DropType>DropTail</DropType>
+            </NormalQueue>
+          </QueueManagement>
+        </Bandwidth>
+      </LinkRule>
+    </VirtualLink>
+  </VirtualChannel>
+</Emulation>

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\Sources\tp4\ClientService.cpp" />
+    <ClCompile Include="..\Sources\tp4\main_server.cpp" />
+    <ClCompile Include="..\Sources\tp4\ServerService.cpp" />
+    <ClCompile Include="..\Sources\tp4\SessionService.cpp" />
+    <ClCompile Include="..\Sources\tp4\session_datacontainer.cpp" />
+    <ClCompile Include="..\Sources\tp4\crc32.cpp">
+      <Filter>common_tp4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\endianness.cpp">
+      <Filter>common_tp4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\ini.c">
+      <Filter>common_tp4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\IPAddress.cpp">
+      <Filter>common_tp4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\IPEndPoint.cpp">
+      <Filter>common_tp4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\Log.cpp">
+      <Filter>common_tp4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\network.cpp">
+      <Filter>common_tp4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\serializer.cpp">
+      <Filter>common_tp4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\StringId.cpp">
+      <Filter>common_tp4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\Time.cpp">
+      <Filter>common_tp4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\types.cpp">
+      <Filter>common_tp4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\Win32Console.cpp">
+      <Filter>common_tp4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp4\UdpClient.cpp">
+      <Filter>common_tp4</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Sources\tp4\ClientService.h" />
+    <ClInclude Include="..\Sources\tp4\ServerService.h" />
+    <ClInclude Include="..\Sources\tp4\SessionService.h" />
+    <ClInclude Include="..\Sources\tp4\session_datacontainer.h" />
+    <ClInclude Include="..\Sources\tp4\DataContainer.h">
+      <Filter>common_tp4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\endianness.h">
+      <Filter>common_tp4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\ini.h">
+      <Filter>common_tp4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\IPAddress.h">
+      <Filter>common_tp4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\IPEndPoint.h">
+      <Filter>common_tp4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\Log.h">
+      <Filter>common_tp4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\network.h">
+      <Filter>common_tp4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\serializer.h">
+      <Filter>common_tp4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\StringId.h">
+      <Filter>common_tp4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\Time.h">
+      <Filter>common_tp4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\types.h">
+      <Filter>common_tp4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\Win32Console.h">
+      <Filter>common_tp4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp4\UdpClient.h">
+      <Filter>common_tp4</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="common_tp4">
+      <UniqueIdentifier>{9c0ed7d5-e8ec-4b91-8e6d-913e798b2ab2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

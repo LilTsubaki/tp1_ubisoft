@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\Sources\tp2\main_socket.cpp" />
+    <ClCompile Include="..\Sources\tp2\utests_socket.cpp" />
+    <ClCompile Include="..\Sources\tp1\endianness.cpp">
+      <Filter>common_tp1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp1\network.cpp">
+      <Filter>common_tp1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp1\serializer.cpp">
+      <Filter>common_tp1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp1\types.cpp">
+      <Filter>common_tp1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp1\Win32Console.cpp">
+      <Filter>common_tp1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp2\crc32.cpp">
+      <Filter>common_tp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp2\IPAddress.cpp">
+      <Filter>common_tp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp2\IPEndPoint.cpp">
+      <Filter>common_tp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp2\StringId.cpp">
+      <Filter>common_tp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp2\Time.cpp">
+      <Filter>common_tp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp2\UdpClient.cpp">
+      <Filter>common_tp2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp1\utests.cpp">
+      <Filter>common_tp1</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="common_tp1">
+      <UniqueIdentifier>{5f0cdf2e-0066-42d1-bc95-fcae947354c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common_tp2">
+      <UniqueIdentifier>{15b05a2c-a599-4052-9aef-bd8b6b4b4bf4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Sources\tp1\endianness.h">
+      <Filter>common_tp1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp1\network.h">
+      <Filter>common_tp1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp1\serializer.h">
+      <Filter>common_tp1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp1\types.h">
+      <Filter>common_tp1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp1\Win32Console.h">
+      <Filter>common_tp1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp2\DataContainer.h">
+      <Filter>common_tp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp2\IPAddress.h">
+      <Filter>common_tp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp2\IPEndPoint.h">
+      <Filter>common_tp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp2\StringId.h">
+      <Filter>common_tp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp2\Time.h">
+      <Filter>common_tp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp2\UdpClient.h">
+      <Filter>common_tp2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp1\utests.h">
+      <Filter>common_tp1</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

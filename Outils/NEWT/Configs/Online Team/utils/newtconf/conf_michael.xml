@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Emulation xmlns="http://research.microsoft.com/asia">
+	<VirtualChannel name="mick1" DispatchType="packet">
+		<FilterList>
+			<Filter name="mick1.filter" not="0">
+
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.12.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK mick1.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Latency>
+					<Fixed>
+						<Time unit="msec">150</Time>
+					</Fixed>
+				</Latency>
+				<Loss>
+					<Periodic>
+						<PerPackets>8</PerPackets>
+					</Periodic>
+				</Loss>
+			</LinkRule>
+			<LinkRule dir="downstream">
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="mick2" DispatchType="packet">
+		<FilterList>
+			<Filter name="mick2.filter" not="0">
+
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.13.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK mick2.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Latency>
+					<Fixed>
+						<Time unit="msec">150</Time>
+					</Fixed>
+				</Latency>
+				<Loss>
+					<Periodic>
+						<PerPackets>8</PerPackets>
+					</Periodic>
+				</Loss>
+			</LinkRule>
+			<LinkRule dir="downstream">
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+
+</Emulation>

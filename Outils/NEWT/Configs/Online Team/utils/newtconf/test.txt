@@ -1,0 +1,34 @@
+# =========================================================
+#
+# name(filename)
+# adapters([it0, it1, ...])
+#
+# upstream() -> the following parameters will apply to the upstream
+# downstream() -> the following parameters will apply to the downstream
+#
+# bw_filter(bw=-1, qsize=0, qmode='packet', qtype='DropTail') -> bandwith limit + queue settings
+# latency_filter(minlatency=0, maxlatency=0) -> min and max latency
+# error_filter(rate) -> error rate with max 1.0
+# loss_filter(rate) -> loss of one every 'rate' packets
+#
+#
+# add_console(name, ip, interface_idx)
+#
+# =========================================================
+
+name("rhhhaaa_test")
+adapters(['00-0E-0C-07-AF-33', '00-01-29-D0-72-90'])
+
+upstream()
+latency_filter(25, 60)
+loss_filter(50)
+bw_filter(256, qsize=150)
+
+downstream()
+latency_filter(40)
+loss_filter(100)
+
+add_console('pt01', '192.168.2.2', 0)
+add_console('pt02', '192.168.2.3', 0)
+add_console('pt03', '192.168.2.4', 0)
+add_console('pt04', '192.168.2.5', 0)

@@ -1,0 +1,35 @@
+# =========================================================
+#
+# name(filename)
+# adapters([it0, it1, ...])
+#
+# upstream() -> the following parameters will apply to the upstream
+# downstream() -> the following parameters will apply to the downstream
+#
+# bw_filter(bw=-1, qsize=0, qmode='packet', qtype='DropTail') -> bandwith limit + queue settings
+# latency_filter(minlatency=0, maxlatency=0) -> min and max latency
+# error_filter(rate) -> error rate with max 1.0
+# loss_filter(rate) -> loss of one every 'rate' packets
+#
+#
+# add_console(name, ip, interface_idx)
+#
+# =========================================================
+
+name("devtest_default_conditions")
+adapters(['00-0E-0C-07-AF-33', '00-01-29-D0-72-90'])
+
+upstream()
+latency_filter(75)
+loss_filter(50)
+
+
+
+add_console('Syl', '192.168.108.2')
+add_console('Ju', '192.168.238.2')
+add_console('diane', '192.168.68.2')
+add_console('baz', '192.168.227.2')
+add_console('yo', '192.168.92.2')
+add_console('Kim', '192.168.112.2')
+add_console('nico', '192.168.207.2')
+add_console('mat', '192.168.232.2')

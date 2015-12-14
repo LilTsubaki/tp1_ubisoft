@@ -1,0 +1,32 @@
+# =========================================================
+#
+# name(filename)
+# adapters([it0, it1, ...])
+#
+# global_upstream_filter(bwlimit, minlatency, maxlatency, errorrate, periodicloss)
+# global_downstream_filter(bwlimit, minlatency, maxlatency, errorrate, periodicloss)
+#
+# add_console(name, ip, interface_idx)
+#
+# =========================================================
+
+name("test_abo")
+adapters(['00-0E-0C-07-AF-33', '00-01-29-D0-72-90'])
+
+upstream()
+latency_filter(80, 100)
+loss_filter(30)
+bw_filter(128)
+
+#downstream()
+#latency_filter(80, 100)
+#loss_filter(30)
+#bw_filter(256, qsize=100)
+
+
+#add_console('k45', '192.168.219.2')
+add_console('k47', '192.168.132.2')
+add_console('abo01', '192.168.113.2')
+add_console('abo02', '192.168.208.2')
+add_console('abo03', '192.168.222.2')
+#add_console('franck2', '192.168.203.2')

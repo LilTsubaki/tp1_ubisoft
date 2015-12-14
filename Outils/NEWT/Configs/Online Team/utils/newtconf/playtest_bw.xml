@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Emulation xmlns="http://research.microsoft.com/asia">
+	<VirtualChannel name="pt01" DispatchType="packet">
+		<FilterList>
+			<Filter name="pt01.filter" not="0">
+				<PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.98.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK pt01.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Bandwidth>
+					<Speed unit="kbps">256</Speed>
+					<QueueManagement>
+						<NormalQueue>
+							<Size>100</Size>
+							<QueueMode>packet</QueueMode>
+							<DropType>DropRandom</DropType>
+						</NormalQueue>
+					</QueueManagement>
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">75</Min>
+						<Max unit="msec">110</Max>
+					</Uniform>
+				</Latency>
+			</LinkRule>
+			<LinkRule dir="downstream">
+				<Bandwidth>
+					<Speed unit="kbps">512</Speed>
+					<QueueManagement>
+						<NormalQueue>
+							<Size>100</Size>
+							<QueueMode>packet</QueueMode>
+							<DropType>DropRandom</DropType>
+						</NormalQueue>
+					</QueueManagement>
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">75</Min>
+						<Max unit="msec">110</Max>
+					</Uniform>
+				</Latency>
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="pt02" DispatchType="packet">
+		<FilterList>
+			<Filter name="pt02.filter" not="0">
+				<PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.250.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK pt02.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Bandwidth>
+					<Speed unit="kbps">256</Speed>
+					<QueueManagement>
+						<NormalQueue>
+							<Size>100</Size>
+							<QueueMode>packet</QueueMode>
+							<DropType>DropRandom</DropType>
+						</NormalQueue>
+					</QueueManagement>
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">75</Min>
+						<Max unit="msec">110</Max>
+					</Uniform>
+				</Latency>
+			</LinkRule>
+			<LinkRule dir="downstream">
+				<Bandwidth>
+					<Speed unit="kbps">512</Speed>
+					<QueueManagement>
+						<NormalQueue>
+							<Size>100</Size>
+							<QueueMode>packet</QueueMode>
+							<DropType>DropRandom</DropType>
+						</NormalQueue>
+					</QueueManagement>
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">75</Min>
+						<Max unit="msec">110</Max>
+					</Uniform>
+				</Latency>
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="pt03" DispatchType="packet">
+		<FilterList>
+			<Filter name="pt03.filter" not="0">
+				<PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.9.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK pt03.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Bandwidth>
+					<Speed unit="kbps">256</Speed>
+					<QueueManagement>
+						<NormalQueue>
+							<Size>100</Size>
+							<QueueMode>packet</QueueMode>
+							<DropType>DropRandom</DropType>
+						</NormalQueue>
+					</QueueManagement>
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">75</Min>
+						<Max unit="msec">110</Max>
+					</Uniform>
+				</Latency>
+			</LinkRule>
+			<LinkRule dir="downstream">
+				<Bandwidth>
+					<Speed unit="kbps">512</Speed>
+					<QueueManagement>
+						<NormalQueue>
+							<Size>100</Size>
+							<QueueMode>packet</QueueMode>
+							<DropType>DropRandom</DropType>
+						</NormalQueue>
+					</QueueManagement>
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">75</Min>
+						<Max unit="msec">110</Max>
+					</Uniform>
+				</Latency>
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="pt04" DispatchType="packet">
+		<FilterList>
+			<Filter name="pt04.filter" not="0">
+				<PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.57.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK pt04.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Bandwidth>
+					<Speed unit="kbps">256</Speed>
+					<QueueManagement>
+						<NormalQueue>
+							<Size>100</Size>
+							<QueueMode>packet</QueueMode>
+							<DropType>DropRandom</DropType>
+						</NormalQueue>
+					</QueueManagement>
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">75</Min>
+						<Max unit="msec">110</Max>
+					</Uniform>
+				</Latency>
+			</LinkRule>
+			<LinkRule dir="downstream">
+				<Bandwidth>
+					<Speed unit="kbps">512</Speed>
+					<QueueManagement>
+						<NormalQueue>
+							<Size>100</Size>
+							<QueueMode>packet</QueueMode>
+							<DropType>DropRandom</DropType>
+						</NormalQueue>
+					</QueueManagement>
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">75</Min>
+						<Max unit="msec">110</Max>
+					</Uniform>
+				</Latency>
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="pt05" DispatchType="packet">
+		<FilterList>
+			<Filter name="pt05.filter" not="0">
+				<PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.64.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK pt05.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Bandwidth>
+					<Speed unit="kbps">256</Speed>
+					<QueueManagement>
+						<NormalQueue>
+							<Size>100</Size>
+							<QueueMode>packet</QueueMode>
+							<DropType>DropRandom</DropType>
+						</NormalQueue>
+					</QueueManagement>
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">75</Min>
+						<Max unit="msec">110</Max>
+					</Uniform>
+				</Latency>
+			</LinkRule>
+			<LinkRule dir="downstream">
+				<Bandwidth>
+					<Speed unit="kbps">512</Speed>
+					<QueueManagement>
+						<NormalQueue>
+							<Size>100</Size>
+							<QueueMode>packet</QueueMode>
+							<DropType>DropRandom</DropType>
+						</NormalQueue>
+					</QueueManagement>
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">75</Min>
+						<Max unit="msec">110</Max>
+					</Uniform>
+				</Latency>
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="pt06" DispatchType="packet">
+		<FilterList>
+			<Filter name="pt06.filter" not="0">
+				<PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.107.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK pt06.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Bandwidth>
+					<Speed unit="kbps">256</Speed>
+					<QueueManagement>
+						<NormalQueue>
+							<Size>100</Size>
+							<QueueMode>packet</QueueMode>
+							<DropType>DropRandom</DropType>
+						</NormalQueue>
+					</QueueManagement>
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">75</Min>
+						<Max unit="msec">110</Max>
+					</Uniform>
+				</Latency>
+			</LinkRule>
+			<LinkRule dir="downstream">
+				<Bandwidth>
+					<Speed unit="kbps">512</Speed>
+					<QueueManagement>
+						<NormalQueue>
+							<Size>100</Size>
+							<QueueMode>packet</QueueMode>
+							<DropType>DropRandom</DropType>
+						</NormalQueue>
+					</QueueManagement>
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">75</Min>
+						<Max unit="msec">110</Max>
+					</Uniform>
+				</Latency>
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="pt07" DispatchType="packet">
+		<FilterList>
+			<Filter name="pt07.filter" not="0">
+				<PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.240.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK pt07.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Bandwidth>
+					<Speed unit="kbps">256</Speed>
+					<QueueManagement>
+						<NormalQueue>
+							<Size>100</Size>
+							<QueueMode>packet</QueueMode>
+							<DropType>DropRandom</DropType>
+						</NormalQueue>
+					</QueueManagement>
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">75</Min>
+						<Max unit="msec">110</Max>
+					</Uniform>
+				</Latency>
+			</LinkRule>
+			<LinkRule dir="downstream">
+				<Bandwidth>
+					<Speed unit="kbps">512</Speed>
+					<QueueManagement>
+						<NormalQueue>
+							<Size>100</Size>
+							<QueueMode>packet</QueueMode>
+							<DropType>DropRandom</DropType>
+						</NormalQueue>
+					</QueueManagement>
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">75</Min>
+						<Max unit="msec">110</Max>
+					</Uniform>
+				</Latency>
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+	<VirtualChannel name="pt08" DispatchType="packet">
+		<FilterList>
+			<Filter name="pt08.filter" not="0">
+				<PhysicalAddress>00-01-29-D0-72-90</PhysicalAddress>
+				<IpVersion>IPv4</IpVersion>
+				<Local>
+					<IpAddress>0.0.0.0</IpAddress>
+					<IpMask>0.0.0.0</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Local>
+				<Remote>
+					<IpAddress>192.168.155.2</IpAddress>
+					<IpMask>255.255.255.255</IpMask>
+					<PortBegin>0</PortBegin>
+					<PortEnd>65535</PortEnd>
+				</Remote>
+			</Filter>
+		</FilterList>
+		<VirtualLink name="LINK pt08.filter" instances="1">
+			<LinkRule dir="upstream">
+				<Bandwidth>
+					<Speed unit="kbps">256</Speed>
+					<QueueManagement>
+						<NormalQueue>
+							<Size>100</Size>
+							<QueueMode>packet</QueueMode>
+							<DropType>DropRandom</DropType>
+						</NormalQueue>
+					</QueueManagement>
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">75</Min>
+						<Max unit="msec">110</Max>
+					</Uniform>
+				</Latency>
+			</LinkRule>
+			<LinkRule dir="downstream">
+				<Bandwidth>
+					<Speed unit="kbps">512</Speed>
+					<QueueManagement>
+						<NormalQueue>
+							<Size>100</Size>
+							<QueueMode>packet</QueueMode>
+							<DropType>DropRandom</DropType>
+						</NormalQueue>
+					</QueueManagement>
+				</Bandwidth>
+				<Latency>
+					<Uniform>
+						<Min unit="msec">75</Min>
+						<Max unit="msec">110</Max>
+					</Uniform>
+				</Latency>
+			</LinkRule>
+		</VirtualLink>
+	</VirtualChannel>
+
+</Emulation>

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\Sources\tp3\main_server.cpp" />
+    <ClCompile Include="..\Sources\tp3\ServerService.cpp" />
+    <ClCompile Include="..\Sources\tp3\SessionService.cpp" />
+    <ClCompile Include="..\Sources\tp3\ClientService.cpp" />
+    <ClCompile Include="..\Sources\tp3\crc32.cpp">
+      <Filter>common_tp3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp3\endianness.cpp">
+      <Filter>common_tp3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp3\IPAddress.cpp">
+      <Filter>common_tp3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp3\IPEndPoint.cpp">
+      <Filter>common_tp3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp3\network.cpp">
+      <Filter>common_tp3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp3\serializer.cpp">
+      <Filter>common_tp3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp3\StringId.cpp">
+      <Filter>common_tp3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp3\Time.cpp">
+      <Filter>common_tp3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp3\types.cpp">
+      <Filter>common_tp3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp3\UdpClient.cpp">
+      <Filter>common_tp3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp3\Win32Console.cpp">
+      <Filter>common_tp3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp3\session_datacontainer.cpp" />
+    <ClCompile Include="..\Sources\tp3\ini.c">
+      <Filter>common_tp3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\tp3\Log.cpp">
+      <Filter>common_tp3</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Sources\tp3\ServerService.h" />
+    <ClInclude Include="..\Sources\tp3\SessionService.h" />
+    <ClInclude Include="..\Sources\tp3\ClientService.h" />
+    <ClInclude Include="..\Sources\tp3\DataContainer.h">
+      <Filter>common_tp3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp3\endianness.h">
+      <Filter>common_tp3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp3\IPAddress.h">
+      <Filter>common_tp3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp3\IPEndPoint.h">
+      <Filter>common_tp3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp3\network.h">
+      <Filter>common_tp3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp3\serializer.h">
+      <Filter>common_tp3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp3\StringId.h">
+      <Filter>common_tp3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp3\Time.h">
+      <Filter>common_tp3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp3\types.h">
+      <Filter>common_tp3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp3\UdpClient.h">
+      <Filter>common_tp3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp3\Win32Console.h">
+      <Filter>common_tp3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp3\session_datacontainer.h" />
+    <ClInclude Include="..\Sources\tp3\ini.h">
+      <Filter>common_tp3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\tp3\Log.h">
+      <Filter>common_tp3</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="common_tp3">
+      <UniqueIdentifier>{8f53b943-b8c4-4ccd-b01e-bdf4f6a058a9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

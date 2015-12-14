@@ -1,0 +1,12 @@
+WindowSize=8
+MaxRetransmit=10
+RTTInitial=500
+RTTRetransmit=750
+MaxSilence/*Timeout*/=5000
+UnreliableDropMinTrigger=0
+UnreliableDropMaxTrigger=5
+KeepAliveTimeout=1000
+RetransmitTimeoutMultiplier=1.250000
+ExtraRetransmitTimeoutMultiplier=1.000000
+ExtraRetransmitTimeoutTrigger=50
+ReliableBackOff=false

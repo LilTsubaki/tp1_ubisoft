@@ -1,0 +1,21 @@
+# =========================================================
+#
+# name(filename)
+# adapters([it0, it1, ...])
+#
+# global_upstream_filter(bwlimit, minlatency, maxlatency, errorrate, periodicloss)
+# global_downstream_filter(bwlimit, minlatency, maxlatency, errorrate, periodicloss)
+#
+# add_console(name, ip, interface_idx)
+#
+# =========================================================
+
+name("conf_sylvain")
+adapters(['00-0E-0C-07-AF-33', '00-01-29-D0-72-90'])
+
+upstream()
+latency_filter(150)
+loss_filter(8)
+#bw_filter(128, qsize=100)
+
+add_console('sylvain.eriksen', '192.168.108.2')

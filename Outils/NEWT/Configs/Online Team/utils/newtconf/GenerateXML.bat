@@ -1,0 +1,1 @@
+python newtconf.py %%1
