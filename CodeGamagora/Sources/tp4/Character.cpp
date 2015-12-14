@@ -261,8 +261,14 @@ void Character::GoTo(float x, float y)
 
 	if (IsMaster())
 	{
-		// Send to replica ?
+		MoveCharacterRequest request;
+		request._id = _id;
+		request._x = x;
+		request._y = y;
+
+		BroadcastDataContainerToReplicas(request);
 	}
+
 }
 
 //**********************************************************************************************************************

@@ -94,6 +94,7 @@ protected:
 
 	void _OnCreateEntityRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr);
 	void _OnCreatePlayerRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr);
+	void _OnMoveCharacterRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr);
 	
 
 	// SFML stuff

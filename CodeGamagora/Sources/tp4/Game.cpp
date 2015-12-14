@@ -770,9 +770,38 @@ bool Game::OnNetworkData(uu::u32 dataContainerId, void* bytes, int size, uu::net
 		_OnCreatePlayerRequest(bytes, size, from_addr);
 		return true;
 	}
+
+	if (MoveCharacterRequest::dataContainerId == dataContainerId)
+	{
+		_OnMoveCharacterRequest(bytes, size, from_addr);
+		return true;
+	}
 	
 
 	return false;
+}
+
+//**********************************************************************************************************************
+void Game::_OnMoveCharacterRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr)
+{
+	Log(LogType::eTrace, LogModule::eGame, true, "MoveCharacterRequest received from %s\n", from_addr.ToString());
+
+	uu::Reader reader(bytes, size, uu::Endianness::eNetworkEndian);
+	MoveCharacterRequest request;
+
+	if (request.ReadFromNetworkData(reader, from_addr) == false)
+	{
+		Log(LogType::eError, LogModule::eGame, true, "unable to read datacontainer MoveCharacterRequest\n");
+		return;
+	}
+
+	Entity* ent = GetEntity(request._id);
+
+	Character* ch = dynamic_cast<Character*>(ent);
+	if (ch != nullptr)
+	{
+		ch->GoTo(request._x, request._y);
+	}
 }
 
 //**********************************************************************************************************************

@@ -43,6 +43,38 @@ bool CreateEntityRequest::WriteToNetworkData(uu::Writer& writer)
 
 //**********************************************************************************************************************
 //**********************************************************************************************************************
+uu::StringId MoveCharacterRequest::dataContainerId = uu::StringId("MoveCharacterRequest");
+
+//**********************************************************************************************************************
+bool MoveCharacterRequest::ReadFromNetworkData(uu::Reader& reader, uu::network::IPEndPoint const& from_addr)
+{
+	if (_ReadDataContainerId(reader) == false) return false;
+
+	if (reader.ReadUInt32(_id) == false) return false;
+	if (reader.ReadFloat(_x) == false) return false;
+	if (reader.ReadFloat(_y) == false) return false;
+
+	Log(LogType::eTrace, LogModule::eDataContainer, true, "MoveCharacterRequest::ReadFromNetworkData _owner=%s\n", _owner.ToString());
+
+	return true;
+}
+
+//**********************************************************************************************************************
+bool MoveCharacterRequest::WriteToNetworkData(uu::Writer& writer)
+{
+	if (_WriteDataContainerId(writer) == false) return false;
+
+	if (writer.WriteUInt32(_id) == false) return false;
+	if (writer.WriteFloat(_x) == false) return false;
+	if (writer.WriteFloat(_y) == false) return false;
+
+	Log(LogType::eTrace, LogModule::eDataContainer, true, "MoveCharacterRequest::WriteToNetworkData _owner=%s\n", _owner.ToString());
+
+	return true;
+}
+
+//**********************************************************************************************************************
+//**********************************************************************************************************************
 uu::StringId CreateCharacterRequest::dataContainerId = uu::StringId("CreateCharacterRequest");
 
 //**********************************************************************************************************************
