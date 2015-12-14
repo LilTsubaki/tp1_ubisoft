@@ -814,17 +814,24 @@ void Game::_OnCreatePlayerRequest(void* bytes, int size, uu::network::IPEndPoint
 
 	uu::StringId const& type = GetKnownType(request._type);
 
-	Entity* entity = CreateNetworkEntity(type, request._name, request._id, request._owner);
+	Entity* entity = GetEntity(request._id);
+	if (entity == nullptr) {
+		entity = CreateNetworkEntity(type, request._name, request._id, request._owner);
+
+		for (std::list<Entity *>::iterator it = _entities.begin(); it != _entities.end(); ++it) {
+
+			DispatchCreateEntityToSessionClients(**it);
+		}
+	}
+	
 	if (entity != nullptr)
 	{
 		entity->ReadFromContainer(request);
 		entity->SetPosition(request._x, request._y);
-		for (std::list<Entity *>::iterator it = _entities.begin(); it != _entities.end();++it) {
-
-			DispatchCreateEntityToSessionClients(*(*it));
-		}
 
 	}
+
+	
 }
 
 
