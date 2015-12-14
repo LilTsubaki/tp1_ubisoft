@@ -819,6 +819,11 @@ void Game::_OnCreatePlayerRequest(void* bytes, int size, uu::network::IPEndPoint
 	{
 		entity->ReadFromContainer(request);
 		entity->SetPosition(request._x, request._y);
+		for (std::list<Entity *>::iterator it = _entities.begin(); it != _entities.end();++it) {
+
+			DispatchCreateEntityToSessionClients(*(*it));
+		}
+
 	}
 }
 
