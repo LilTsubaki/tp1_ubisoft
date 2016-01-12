@@ -104,3 +104,22 @@ public:
 
 };
 
+//**********************************************************************************************************************
+class CreateBombRequest : public uu::network::DataContainer
+{
+public:
+	static uu::StringId dataContainerId;
+
+public:
+	//uu::network::DataContainer overrides
+	virtual uu::StringId const& GetDataContainerId() const { return dataContainerId; }
+	virtual bool ReadFromNetworkData(uu::Reader& reader, uu::network::IPEndPoint const& from_addr);
+	virtual bool WriteToNetworkData(uu::Writer& writer);
+
+public:
+	time_t _bomb_date;
+	float _x;
+	float _y;
+
+};
+

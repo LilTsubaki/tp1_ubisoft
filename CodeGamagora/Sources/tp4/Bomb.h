@@ -23,7 +23,7 @@ public:
 	};
 
 public:
-	Bomb();
+	Bomb(time_t bomb_date);
 	//Entity overrides
 	virtual bool Update(time_t time_now);
 	virtual void Draw(sf::RenderTarget& target, bool bDebugDraw = false);

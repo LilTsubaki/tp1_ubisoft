@@ -4,7 +4,7 @@
 #include "Time.h"
 
 //**********************************************************************************************************************
-Bomb::Bomb() : Item("Bomb"),
+Bomb::Bomb(time_t bomb_date) : Item("Bomb"),
 	_state(none),
 	_explosion_time(0),
 	_explosion_radius(0.f),
@@ -13,7 +13,7 @@ Bomb::Bomb() : Item("Bomb"),
 {
 	_current_radius = 10.f;
 	_explosion_radius = 150.f;
-	_explosion_time = uu::Time::GetSynchTime() + 4000; // TEMP : fix that for network latency handling
+	_explosion_time = bomb_date + 4000; // TEMP : fix that for network latency handling
 
 	_label.SetFontSize(14);
 	_label.SetStyle(sf::Text::Bold);
@@ -23,7 +23,13 @@ Bomb::Bomb() : Item("Bomb"),
 
 uu::network::DataContainer* Bomb::CreateContainer() const
 {
-	return NULL;
+	CreateBombRequest request;
+	request._bomb_date = _explosion_time - 4000;
+	sf::Vector2f pos;
+	GetPosition(pos);
+	request._x = pos.x;
+	request._y = pos.y;
+	return &request;
 }
 
 void Bomb::ReadFromContainer(uu::network::DataContainer const& container)

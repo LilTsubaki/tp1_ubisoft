@@ -133,4 +133,36 @@ bool CreatePlayerRequest::WriteToNetworkData(uu::Writer& writer)
 	return true;
 }
 
+//**********************************************************************************************************************
+//**********************************************************************************************************************
+uu::StringId CreateBombRequest::dataContainerId = uu::StringId("CreateBombRequest");
+
+//**********************************************************************************************************************
+bool CreateBombRequest::ReadFromNetworkData(uu::Reader& reader, uu::network::IPEndPoint const& from_addr)
+{
+	if (CreateBombRequest::ReadFromNetworkData(reader, from_addr) == false) return false;
+
+	if (reader.ReadFloat(_x) == false) return false;
+	if (reader.ReadFloat(_y) == false) return false;
+	if (reader.ReadInt64(_bomb_date) == false) return false;
+
+	Log(LogType::eTrace, LogModule::eDataContainer, true, "CreateBombRequest::ReadFromNetworkData\n");
+
+	return true;
+}
+
+//**********************************************************************************************************************
+bool CreateBombRequest::WriteToNetworkData(uu::Writer& writer)
+{
+	if (CreateBombRequest::WriteToNetworkData(writer) == false) return false;
+
+	if (writer.WriteFloat(_x) == false) return false;
+	if (writer.WriteFloat(_y) == false) return false;
+	if (writer.WriteInt64(_bomb_date) == false) return false;
+
+	Log(LogType::eTrace, LogModule::eDataContainer, true, "CreateBombRequest::WriteToNetworkData\n");
+
+	return true;
+}
+
 

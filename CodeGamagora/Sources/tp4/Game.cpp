@@ -776,6 +776,12 @@ bool Game::OnNetworkData(uu::u32 dataContainerId, void* bytes, int size, uu::net
 		_OnMoveCharacterRequest(bytes, size, from_addr);
 		return true;
 	}
+
+	if (CreateBombRequest::dataContainerId == dataContainerId)
+	{
+		_OnCreateBombRequest(bytes, size, from_addr);
+		return true;
+	}
 	
 
 	return false;
@@ -803,6 +809,23 @@ void Game::_OnMoveCharacterRequest(void* bytes, int size, uu::network::IPEndPoin
 		ch->GoTo(request._x, request._y);
 	}
 }
+
+void Game::_OnCreateBombRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr){
+	Log(LogType::eTrace, LogModule::eGame, true, "CreateBombRequest received from %s\n", from_addr.ToString());
+
+	uu::Reader reader(bytes, size, uu::Endianness::eNetworkEndian);
+	CreateBombRequest request;
+
+	if (request.ReadFromNetworkData(reader, from_addr) == false)
+	{
+		Log(LogType::eError, LogModule::eGame, true, "unable to read datacontainer CreateBombRequest\n");
+		return;
+	}
+
+	Bomb b(request._bomb_date);
+	b.SetPosition(sf::Vector2f(request._x, request._y));
+}
+
 
 //**********************************************************************************************************************
 void Game::_OnCreateEntityRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr)
@@ -991,7 +1014,7 @@ Entity* Game::_CreateEntityByType(uu::StringId const& type, std::string const& n
 	if (DarkWarrior::type == type) entity = new DarkWarrior();
 	else if (MageBlue::type == type) entity = new MageBlue();
     else if (Paladin::type == type) entity = new Paladin();
-    else if (Bomb::type == type) entity = new Bomb();
+    else if (Bomb::type == type) entity = new Bomb(uu::Time::GetSynchTime());
 	else if (Box1::type == type) entity = new Box1();
 	else if (Box2::type == type) entity = new Box2();
 	else if (Box3::type == type) entity = new Box3();
