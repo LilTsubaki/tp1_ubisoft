@@ -117,7 +117,7 @@ Bomb* Player::SpawnLocalBomb()
 		{
 			_bomb_id = bomb->GetId();
 			bomb->SetPosition(_position);
-			bomb->setExplosionTime(uu::Time::GetSynchTime()+40000);
+			bomb->setExplosionTime(uu::Time::GetSynchTime()+4000);
 			BroadcastDataContainerToReplicas(bomb->CreateContainerBis());
 		}
 	}

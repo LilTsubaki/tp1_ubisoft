@@ -110,11 +110,12 @@ bool Bomb::Update(time_t time_now)
 void Bomb::_RefreshTicks(time_t time_now)
 {
 	if (_time_set) {
-		float timeToExplosion = (_explosion_time - time_now) / 1000.f;
+		float timeToExplosion = ((long)_explosion_time - (long)time_now) / 1000.f;
 
 		if (timeToExplosion > 0.f)
 		{
-			_label.SetText("diff:%.02f  timeexp:%.02f time:%.02f", timeToExplosion, _explosion_time, time_now);
+			_label.SetText("%.02f ", timeToExplosion);
+			//_label.SetText("%i", time_now);
 		}
 		else
 		{

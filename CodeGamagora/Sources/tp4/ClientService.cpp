@@ -343,8 +343,8 @@ bool ClientService::_UpdateResolveServerAddr()
 	request._service_name = Configuration::GetInstance()._service_name;
 
 	//uu::network::IPAddress ip(10,2,6,8);
-	uu::network::IPAddress ip("159.84.141.84");
-	//uu::network::IPAddress ip = uu::network::IPAddress::Broadcast;
+	//uu::network::IPAddress ip("159.84.141.84");
+	uu::network::IPAddress ip = uu::network::IPAddress::Broadcast;
 
 	if (SendDataContainer(request, uu::network::IPEndPoint(ip, Configuration::GetInstance()._server_port)) == true)
 	{
