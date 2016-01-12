@@ -144,7 +144,7 @@ bool CreateBombRequest::ReadFromNetworkData(uu::Reader& reader, uu::network::IPE
 
 	if (reader.ReadFloat(_x) == false) return false;
 	if (reader.ReadFloat(_y) == false) return false;
-	if (reader.ReadInt64(_bomb_date) == false) return false;
+	if (reader.ReadInt64(_explosion_time) == false) return false;
 
 	Log(LogType::eTrace, LogModule::eDataContainer, true, "CreateBombRequest::ReadFromNetworkData\n");
 
@@ -158,7 +158,7 @@ bool CreateBombRequest::WriteToNetworkData(uu::Writer& writer)
 
 	if (writer.WriteFloat(_x) == false) return false;
 	if (writer.WriteFloat(_y) == false) return false;
-	if (writer.WriteInt64(_bomb_date) == false) return false;
+	if (writer.WriteInt64(_explosion_time) == false) return false;
 
 	Log(LogType::eTrace, LogModule::eDataContainer, true, "CreateBombRequest::WriteToNetworkData\n");
 

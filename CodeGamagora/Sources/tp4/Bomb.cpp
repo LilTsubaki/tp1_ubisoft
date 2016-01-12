@@ -25,7 +25,7 @@ Bomb::Bomb() : Item("Bomb"),
 uu::network::DataContainer* Bomb::CreateContainer() const
 {
 	CreateBombRequest request;
-	request._bomb_date = _explosion_time;
+	request._explosion_time = _explosion_time;
 	sf::Vector2f pos;
 	GetPosition(pos);
 	request._x = pos.x;
@@ -36,7 +36,7 @@ uu::network::DataContainer* Bomb::CreateContainer() const
 CreateBombRequest Bomb::CreateContainerBis() const
 {
 	CreateBombRequest request;
-	request._bomb_date = _explosion_time;
+	request._explosion_time = _explosion_time;
 	sf::Vector2f pos;
 	GetPosition(pos);
 	request._x = pos.x;
@@ -200,5 +200,5 @@ bool Bomb::IsInExplosionRange(sf::Vector2f const& point) const
 void Bomb::setExplosionTime(time_t explosion_time)
 {
 	_explosion_time = explosion_time;
-	bool _time_set = true;
+	_time_set = true;
 }

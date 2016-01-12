@@ -117,7 +117,7 @@ public:
 	virtual bool WriteToNetworkData(uu::Writer& writer);
 
 public:
-	time_t _bomb_date;
+	time_t _explosion_time;
 	float _x;
 	float _y;
 
