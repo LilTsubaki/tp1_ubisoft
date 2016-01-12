@@ -2,6 +2,7 @@
 #include "draw_utils.h"
 #include "Game.h"
 #include "Time.h"
+#include "Log.h"
 
 //**********************************************************************************************************************
 Bomb::Bomb() : Item("Bomb"),
@@ -37,6 +38,7 @@ CreateBombRequest Bomb::CreateContainerBis() const
 {
 	CreateBombRequest request;
 	request._explosion_time = _explosion_time;
+	Log(LogType::eError, LogModule::eGame, true, "--------------coucou: %lu", request._explosion_time);
 	sf::Vector2f pos;
 	GetPosition(pos);
 	request._x = pos.x;
@@ -112,7 +114,7 @@ void Bomb::_RefreshTicks(time_t time_now)
 
 		if (timeToExplosion > 0.f)
 		{
-			_label.SetText("%.02f", timeToExplosion);
+			_label.SetText("diff:%.02f  timeexp:%.02f time:%.02f", timeToExplosion, _explosion_time, time_now);
 		}
 		else
 		{
