@@ -822,8 +822,8 @@ void Game::_OnCreateBombRequest(void* bytes, int size, uu::network::IPEndPoint c
 		return;
 	}
 
-	Bomb b(request._bomb_date);
-	b.SetPosition(sf::Vector2f(request._x, request._y));
+	Bomb* b = dynamic_cast<Bomb*>(Game::GetInstance().CreateLocalEntity(Bomb::type, "bomb"));
+	b->SetPosition(sf::Vector2f(request._x, request._y));
 }
 
 
