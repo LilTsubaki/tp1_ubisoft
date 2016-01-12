@@ -140,7 +140,7 @@ uu::StringId CreateBombRequest::dataContainerId = uu::StringId("CreateBombReques
 //**********************************************************************************************************************
 bool CreateBombRequest::ReadFromNetworkData(uu::Reader& reader, uu::network::IPEndPoint const& from_addr)
 {
-	if (CreateBombRequest::ReadFromNetworkData(reader, from_addr) == false) return false;
+	if (_ReadDataContainerId(reader) == false) return false;
 
 	if (reader.ReadFloat(_x) == false) return false;
 	if (reader.ReadFloat(_y) == false) return false;
@@ -154,7 +154,7 @@ bool CreateBombRequest::ReadFromNetworkData(uu::Reader& reader, uu::network::IPE
 //**********************************************************************************************************************
 bool CreateBombRequest::WriteToNetworkData(uu::Writer& writer)
 {
-	if (CreateBombRequest::WriteToNetworkData(writer) == false) return false;
+	if (_WriteDataContainerId(writer) == false) return false;
 
 	if (writer.WriteFloat(_x) == false) return false;
 	if (writer.WriteFloat(_y) == false) return false;

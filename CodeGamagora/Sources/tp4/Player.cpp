@@ -2,6 +2,7 @@
 #include "player.h"
 #include "Bomb.h"
 #include "Game.h"
+#include "Log.h"
 
 //**********************************************************************************************************************
 Player::Player(const char* name) : Character(name),

@@ -40,7 +40,7 @@ CreateBombRequest Bomb::CreateContainerBis() const
 	GetPosition(pos);
 	request._x = pos.x;
 	request._y = pos.y;
-	return &request;
+	return request;
 }
 
 void Bomb::ReadFromContainer(uu::network::DataContainer const& container)
