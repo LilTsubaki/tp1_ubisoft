@@ -24,7 +24,7 @@ Bomb::Bomb(time_t bomb_date) : Item("Bomb"),
 uu::network::DataContainer* Bomb::CreateContainer() const
 {
 	CreateBombRequest request;
-	request._bomb_date = _explosion_time - 4000;
+	request._bomb_date = _explosion_time;
 	sf::Vector2f pos;
 	GetPosition(pos);
 	request._x = pos.x;
@@ -35,7 +35,7 @@ uu::network::DataContainer* Bomb::CreateContainer() const
 CreateBombRequest Bomb::CreateContainerBis() const
 {
 	CreateBombRequest request;
-	request._bomb_date = _explosion_time - 4000;
+	request._bomb_date = _explosion_time;
 	sf::Vector2f pos;
 	GetPosition(pos);
 	request._x = pos.x;
