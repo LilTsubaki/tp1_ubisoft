@@ -24,7 +24,7 @@ public:
 	};
 
 public:
-	Bomb(time_t bomb_date);
+	Bomb();
 	//Entity overrides
 	virtual bool Update(time_t time_now);
 	virtual void Draw(sf::RenderTarget& target, bool bDebugDraw = false);
@@ -43,6 +43,7 @@ public:
 	float _explosion_radius;
 	float _current_radius;
 	float _power;
+	bool _time_set;
 
 protected:
 	bool _SetState(State new_state);

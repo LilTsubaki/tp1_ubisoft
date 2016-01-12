@@ -3,6 +3,7 @@
 #include "Bomb.h"
 #include "Game.h"
 #include "Log.h"
+#include "Time.h"
 
 //**********************************************************************************************************************
 Player::Player(const char* name) : Character(name),
@@ -116,7 +117,7 @@ Bomb* Player::SpawnLocalBomb()
 		{
 			_bomb_id = bomb->GetId();
 			bomb->SetPosition(_position);
-
+			bomb->setExplosionTime(uu::Time::GetSynchTime());
 			BroadcastDataContainerToReplicas(bomb->CreateContainerBis());
 		}
 	}

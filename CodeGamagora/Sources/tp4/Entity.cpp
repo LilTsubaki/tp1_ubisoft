@@ -31,7 +31,7 @@ void Entity::ReadFromContainer(uu::network::DataContainer const& container)
 }
 
 //**********************************************************************************************************************
-void Entity::WriteToContainer(uu::network::DataContainer& container) const
+void Entity::WriteToContainer(uu::network::DataContainer& container) const 
 {
 	CreateEntityRequest& data = dynamic_cast<CreateEntityRequest&>(container);
 

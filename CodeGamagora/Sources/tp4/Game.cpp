@@ -1015,7 +1015,7 @@ Entity* Game::_CreateEntityByType(uu::StringId const& type, std::string const& n
 	if (DarkWarrior::type == type) entity = new DarkWarrior();
 	else if (MageBlue::type == type) entity = new MageBlue();
     else if (Paladin::type == type) entity = new Paladin();
-    else if (Bomb::type == type) entity = new Bomb(uu::Time::GetSynchTime());
+    else if (Bomb::type == type) entity = new Bomb();
 	else if (Box1::type == type) entity = new Box1();
 	else if (Box2::type == type) entity = new Box2();
 	else if (Box3::type == type) entity = new Box3();

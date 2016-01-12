@@ -4,16 +4,17 @@
 #include "Time.h"
 
 //**********************************************************************************************************************
-Bomb::Bomb(time_t bomb_date) : Item("Bomb"),
+Bomb::Bomb() : Item("Bomb"),
 	_state(none),
 	_explosion_time(0),
 	_explosion_radius(0.f),
 	_current_radius(0.f),
-	_power(300.f)
+	_power(300.f),
+	_time_set(false)
 {
 	_current_radius = 10.f;
 	_explosion_radius = 150.f;
-	_explosion_time = bomb_date + 4000; // TEMP : fix that for network latency handling
+	//_explosion_time = bomb_date + 4000; // TEMP : fix that for network latency handling
 
 	_label.SetFontSize(14);
 	_label.SetStyle(sf::Text::Bold);
@@ -106,15 +107,17 @@ bool Bomb::Update(time_t time_now)
 
 void Bomb::_RefreshTicks(time_t time_now)
 {
-	float timeToExplosion = (_explosion_time - time_now) / 1000.f;
+	if (_time_set) {
+		float timeToExplosion = (_explosion_time - time_now) / 1000.f;
 
-	if (timeToExplosion > 0.f)
-	{
-		_label.SetText("%.02f", timeToExplosion);
-	}
-	else
-	{
-		_SetState(explode);
+		if (timeToExplosion > 0.f)
+		{
+			_label.SetText("%.02f", timeToExplosion);
+		}
+		else
+		{
+			_SetState(explode);
+		}
 	}
 }
 
@@ -197,4 +200,5 @@ bool Bomb::IsInExplosionRange(sf::Vector2f const& point) const
 void Bomb::setExplosionTime(time_t explosion_time)
 {
 	_explosion_time = explosion_time;
+	bool _time_set = true;
 }
