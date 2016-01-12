@@ -34,6 +34,8 @@ public:
 
 	bool IsInExplosionRange(sf::Vector2f const& point) const;
 
+	void setExplosionTime(time_t explosion_time);
+
 public:
 	Label _label;
 	State _state;

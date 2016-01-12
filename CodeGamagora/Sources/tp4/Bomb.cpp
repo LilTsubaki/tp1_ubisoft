@@ -193,3 +193,8 @@ bool Bomb::IsInExplosionRange(sf::Vector2f const& point) const
 
 	return (ellipse.IsPointInside(point));
 }
+
+void Bomb::setExplosionTime(time_t explosion_time)
+{
+	_explosion_time = explosion_time;
+}
