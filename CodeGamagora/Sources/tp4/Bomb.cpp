@@ -32,6 +32,17 @@ uu::network::DataContainer* Bomb::CreateContainer() const
 	return &request;
 }
 
+CreateBombRequest Bomb::CreateContainerBis() const
+{
+	CreateBombRequest request;
+	request._bomb_date = _explosion_time - 4000;
+	sf::Vector2f pos;
+	GetPosition(pos);
+	request._x = pos.x;
+	request._y = pos.y;
+	return &request;
+}
+
 void Bomb::ReadFromContainer(uu::network::DataContainer const& container)
 {
 	Item::ReadFromContainer(container);

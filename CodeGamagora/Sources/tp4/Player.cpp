@@ -116,7 +116,7 @@ Bomb* Player::SpawnLocalBomb()
 			_bomb_id = bomb->GetId();
 			bomb->SetPosition(_position);
 
-			BroadcastDataContainerToReplicas(*(bomb->CreateContainer()));
+			BroadcastDataContainerToReplicas(bomb->CreateContainerBis());
 		}
 	}
 

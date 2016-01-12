@@ -12,6 +12,7 @@ public:
 	virtual uu::StringId const& GetType() const { return type; }
 	virtual bool IsA(uu::StringId const& type) const { if (this->type == type) return true; return Item::IsA(type); }
 	virtual uu::network::DataContainer* CreateContainer() const;
+	virtual CreateBombRequest CreateContainerBis() const;
 
 public:
 	enum State
