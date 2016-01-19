@@ -123,6 +123,7 @@ Bomb* Player::SpawnLocalBomb()
 		{
 			_bomb_id = bomb->GetId();
 			bomb->SetPosition(_position);
+			bomb->_currentPlayer = _id;
 
 			Game::GetInstance().DispatchCreateEntityToSessionClients(*bomb);
 		}
