@@ -23,6 +23,7 @@ public:
 public:
 	bool sendScore(time_t currentTime);
 	void addJoueur(uu::u32 id, time_t time);
+	bool contains(uu::u32);
 };
 
 //classe de gestion du scoring
