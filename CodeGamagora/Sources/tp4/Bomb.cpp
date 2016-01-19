@@ -136,10 +136,8 @@ void Bomb::_RefreshExplode(time_t time_now)
 				ch.GetPosition(position);
 				if (IsInExplosionRange(position) == true)
 				{
-					if (ch.IsDead() == false)
-					{
+					
 						ch.Hit(GetId(), _power);
-					}
 				}
 			}
 
