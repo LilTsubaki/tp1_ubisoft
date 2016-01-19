@@ -7,7 +7,8 @@
 Player::Player(const char* name) : Character(name),
 	_bomb_id(0),
 	_enemy_id(0),
-	_coins(0)
+	_coins(0),
+	_score(0)
 {
 }
 
@@ -71,9 +72,10 @@ bool Player::Update(time_t time_now)
 		list.clear();
 	}
 
-	_label.SetText("%s:  live=%lu  coins=%lu", _name.c_str(), (uu::u32)_current_values._live, _coins);
+	bool b = Character::Update(time_now);
+	_label.SetText("%s:  live=%lu  coins=%lu   score=%lu", _name.c_str(), (uu::u32)_current_values._live, _coins,_score);
 
-	return Character::Update(time_now);
+	return b;
 }
 
 void Player::InvokeLocalCreature()

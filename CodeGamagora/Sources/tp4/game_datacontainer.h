@@ -196,3 +196,38 @@ public:
 	uu::u32 _id_to_hit;
 	float _hit_value;
 };
+
+//**********************************************************************************************************************
+class UpdateScoreContainer : public uu::network::DataContainer
+{
+public:
+	static uu::StringId dataContainerId;
+
+public:
+	//uu::network::DataContainer overrides
+	virtual uu::StringId const& GetDataContainerId() const { return dataContainerId; }
+	virtual bool ReadFromNetworkData(uu::Reader& reader, uu::network::IPEndPoint const& from_addr);
+	virtual bool WriteToNetworkData(uu::Writer& writer);
+
+public:
+	uu::u32 _id_player;
+	uu::u32 _score;
+};
+
+//**********************************************************************************************************************
+class KillEnemyContainer : public uu::network::DataContainer
+{
+public:
+	static uu::StringId dataContainerId;
+
+public:
+	//uu::network::DataContainer overrides
+	virtual uu::StringId const& GetDataContainerId() const { return dataContainerId; }
+	virtual bool ReadFromNetworkData(uu::Reader& reader, uu::network::IPEndPoint const& from_addr);
+	virtual bool WriteToNetworkData(uu::Writer& writer);
+
+public:
+	uu::u32 _id_attacker;
+	uu::u32 _id_enemy;
+	time_t _currenttime;
+};

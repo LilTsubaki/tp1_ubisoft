@@ -9,6 +9,7 @@
 #include "draw_utils.h"
 #include "Log.h"
 #include "game_datacontainer.h"
+#include "Time.h"
 
 //**********************************************************************************************************************
 uu::StringId Character::type = uu::StringId("Character");
@@ -128,7 +129,7 @@ bool Character::Update(time_t time_now)
 
 	Animable::Update(time_now);
 
-	_label.SetText("%s:  live=%lu", _name.c_str(), (uu::u32)_current_values._live);
+	//_label.SetText("%s:  live=%lu", _name.c_str(), (uu::u32)_current_values._live);
 
 	return true;
 }
@@ -434,6 +435,18 @@ void Character::Hit(uu::u32 id_attacker, float hit_value)
 	{
 		_current_values._live = 0;
 		_SetState(dead);
+		if (attacker->IsMaster()) 
+		{
+			Enemy* enemy = dynamic_cast<Enemy*>(this);
+			KillEnemyContainer container;
+			container._id_attacker = id_attacker;
+			container._id_enemy = _id;
+			container._currenttime = uu::Time::GetSynchTime();
+			Game::GetInstance().BroadcastContainer(container);
+		}
+		
+
+
 	}
 }
 

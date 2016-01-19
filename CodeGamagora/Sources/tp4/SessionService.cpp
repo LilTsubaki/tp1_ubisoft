@@ -5,6 +5,7 @@
 #include "ini.h"
 #include "Time.h"
 #include "Log.h"
+#include "Game.h"
 
 //**********************************************************************************************************************
 /*static*/ int Configuration::_handler_ini(void* user, const char* section, const char* name, const char* value)
@@ -46,8 +47,9 @@ Configuration::Configuration(): Singleton<Configuration>()
 	// game area size
 	_area_width = 720;
 	_area_height = (uu::u32)(_area_width * 0.75f);
-	_timer_spawn_enemy = 30000;	// 30secs
+	_timer_spawn_enemy = 3000;	// 30secs
 	_timer_spawn_coin = 30000;	// 30secs
+	_timer_refresh_point = 500; // 0.5sec
 }
 
 //**********************************************************************************************************************
@@ -503,7 +505,7 @@ bool SessionService::SendDataContainerToSessionExclude(uu::network::DataContaine
 }
 
 //**********************************************************************************************************************
-bool SessionService::SendDataContainerToSession(uu::network::DataContainer& datacontainer, SessionDescriptor const& session)
+bool SessionService::SendDataContainerToSession(uu::network::DataContainer& datacontainer, SessionDescriptor const& session, bool ignore)
 {
 	if (session._clients.empty() == true)
 		return false;
@@ -520,7 +522,7 @@ bool SessionService::SendDataContainerToSession(uu::network::DataContainer& data
 
 	for (auto it = session._clients.begin();  it != session._clients.end(); it++)
 	{
-		if (_local_client._addr != (*it)._addr)
+		if (ignore||_local_client._addr != (*it)._addr)
 		{
 			if (_udpClient.SendTo((char*)writer.GetData(), (int)writer.GetSize(), (*it)._addr) == false)
 			{
@@ -551,3 +553,98 @@ bool SessionService::SendDataContainer(uu::network::DataContainer& datacontainer
 }
 
 //**********************************************************************************************************************
+
+bool DegatNPC::sendScore(time_t currentTime)
+{
+	if (currentTime > timeOut)
+	{
+		//broadcast des points TODO <---------------------------------
+		if (idJoueur.size() == 0)
+			return true;
+		int pts = 10 / idJoueur.size();
+		for (int i = 0; i < idJoueur.size(); ++i) {
+			Entity* ent = Game::GetInstance().GetEntity(idJoueur[i]);
+			Player* player = dynamic_cast<Player*>(ent);
+			if (player != nullptr) {
+				player->_score += pts;
+				UpdateScoreContainer container;
+				container._id_player = idJoueur[i];
+				container._score = player->_score;
+				Game::GetInstance().SendDataContainerToSessionClients(container);
+			}
+		}
+		return true;
+	}
+	return false;
+}
+
+void DegatNPC::addJoueur(uu::u32 id, time_t time)
+{
+	if(time < timeOut)
+		idJoueur.push_back(id);
+}
+
+void ScoringManager::sendScore(time_t currentTime)
+{
+	std::vector<Entity*> players;
+	Game::GetInstance().GetEntitiesList(players, Player::type, 0);
+
+
+	std::vector<int> keys;
+	std::map<uu::u32, DegatNPC>::iterator it;
+	for (it = EnemiesHit.begin(); it != EnemiesHit.end(); it++)
+	{
+		if (it->second.sendScore(currentTime))
+			keys.push_back(it->first);
+	}
+
+	for (int i = 0; i < keys.size(); i++)
+		EnemiesHit.erase(keys[i]);
+		
+}
+	
+
+void ScoringManager::addHit(uu::u32 idNpc, uu::u32 idJoueur, time_t time)
+{
+	std::map<uu::u32, DegatNPC>::iterator it;
+	it = EnemiesHit.find(idNpc);
+
+	//ajout quand le npc meurt
+	if (it == EnemiesHit.end())
+	{
+		DegatNPC dn(time + 450);
+		EnemiesHit[idNpc] = dn;
+		
+	}
+
+	Entity* ent = Game::GetInstance().GetEntity(idJoueur);
+	Player* player = dynamic_cast<Player*>(ent);
+	Bomb* bomb = dynamic_cast<Bomb*>(ent);
+
+	//si le hit proviens d'un player
+	if (player != nullptr)
+	{
+		EnemiesHit[idNpc].addJoueur(idJoueur, time);
+		//Log(LogType::eError, LogModule::eGame, true, "je suis un player\n");
+	}
+		
+	//sinon on cherche l'id du player à qui appartient le player
+	else if (bomb!=nullptr)
+	{
+		//Log(LogType::eError, LogModule::eGame, true, "je suis une bombe\n");
+		std::vector<Entity*> players;
+		Game::GetInstance().GetEntitiesList(players, Player::type, 0);
+
+		if (!players.empty())
+		{
+			for (auto it = players.begin(); it != players.end(); it++)
+			{
+				Player& player = dynamic_cast<Player&>(*(*it));
+				if (player.getBombId() == idJoueur)
+					EnemiesHit[idNpc].addJoueur(player.GetId(), time);
+			}
+		}
+
+	}
+	
+}

@@ -20,17 +20,20 @@ public:
 	virtual bool IsA(uu::StringId const& type) const { if (this->type == type) return true; return Character::IsA(type); }
 	virtual bool Update(time_t time_now);
 	virtual uu::network::DataContainer* CreateContainer() const;
+	uu::u32 _score;
 
 public:
 	Player(const char* name);
 
 	void    InvokeLocalCreature();
 	Bomb*   SpawnLocalBomb();
+	uu::u32 getBombId() { return _bomb_id; }
 
 protected:
 	uu::u32 _bomb_id;
 	uu::u32 _enemy_id;
 	uu::u32 _coins;
+	
 
 	//Entity overrides
 	virtual void ReadFromContainer(uu::network::DataContainer const& container);

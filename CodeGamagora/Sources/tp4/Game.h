@@ -31,8 +31,10 @@ public:
 		game,
 		end,
 	};
-
+	bool isHost;
+	ScoringManager* scoringManager;
 public:
+	
 	Game();
 	virtual ~Game();
 
@@ -59,6 +61,7 @@ public:
 	Enemy* CreateLocalEnemy();
 
 	bool SendDataContainerToSessionClients(uu::network::DataContainer& datacontainer);
+	bool BroadcastContainer(uu::network::DataContainer & datacontainer);
 	bool SendDataContainer(uu::network::DataContainer& datacontainer, uu::network::IPEndPoint const& to_addr);
 
 	void DispatchLocalEntityGoTo(Character const& character, sf::Vector2f const& point);
@@ -105,6 +108,10 @@ protected:
 	void _OnFollowObjectRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr);
 	void _OnAttackObjectRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr);
 	void _OnHitObjectRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr);
+
+	void _OnKillEnemyContainer(void * bytes, int size, uu::network::IPEndPoint const & from_addr);
+
+	void _OnUpdateScoreContainer(void * bytes, int size, uu::network::IPEndPoint const & from_addr);
 
 	// SFML stuff
 	void _OnDraw(sf::RenderTarget& target);

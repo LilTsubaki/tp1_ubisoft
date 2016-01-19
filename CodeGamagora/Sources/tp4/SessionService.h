@@ -8,6 +8,40 @@
 #include "DataContainer.h"
 #include "Win32Console.h"
 
+
+class DegatNPC
+{
+
+public:
+	DegatNPC() {}
+	DegatNPC(time_t time) : timeOut(time) {}
+
+public:
+	std::vector<uu::u32> idJoueur;
+	time_t timeOut;
+
+public:
+	bool sendScore(time_t currentTime);
+	void addJoueur(uu::u32 id, time_t time);
+};
+
+//classe de gestion du scoring
+class ScoringManager
+{
+	public:
+		ScoringManager() {}
+
+	public:
+		//liste contenant une liste de joueur ayant touché un npc 
+		std::map<uu::u32, DegatNPC> EnemiesHit;
+
+	public:
+		void sendScore(time_t currentTime);
+		void addHit(uu::u32 idNpc, uu::u32 idJoueur, time_t time);
+};
+
+
+
 //**********************************************************************************************************************
 class Configuration: public Singleton<Configuration>
 {
@@ -45,6 +79,7 @@ public:
 	uu::u32		_area_height;
 	time_t		_timer_spawn_enemy;		// timer period to spawn enemy
 	time_t		_timer_spawn_coin;		// timer period to spawn coins
+	time_t		_timer_refresh_point;
 };
 
 //**********************************************************************************************************************
@@ -107,6 +142,7 @@ public:
 	virtual uu::StringId const& GetDataContainerId() const { return SessionDescriptor::dataContainerId; }
 	virtual bool ReadFromNetworkData(uu::Reader& reader, uu::network::IPEndPoint const& from_addr);
 	virtual bool WriteToNetworkData(uu::Writer& writer);
+	std::vector<SessionClient> getClients() { return _clients; }
 
 protected:
 	SessionClient* _SetSessionClientAsLocal(SessionClient const& client);
@@ -171,7 +207,7 @@ public:
 	void RemoveSessionListener(ISessionListener* listener);
 
 	bool SendDataContainerToSessionExclude(uu::network::DataContainer& datacontainer, SessionDescriptor const& session, uu::network::IPEndPoint const& exclude_addr);
-	bool SendDataContainerToSession(uu::network::DataContainer& datacontainer, SessionDescriptor const& session);
+	bool SendDataContainerToSession(uu::network::DataContainer& datacontainer, SessionDescriptor const& session, bool ignore=false);
 	bool SendDataContainer(uu::network::DataContainer& datacontainer, uu::network::IPEndPoint const& to_addr);
 
 protected:

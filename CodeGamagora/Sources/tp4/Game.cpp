@@ -42,6 +42,7 @@ static  const char* _static_game_state_strings[] = { "none", "session", "lobby",
 
 static uu::StringId _timer_spawn_enemy = uu::StringId("TimerSpawnEnemy");
 static uu::StringId _timer_spawn_coin = uu::StringId("TimerSpawnCoin");
+static uu::StringId _timer_refresh_point = uu::StringId("TimerRefreshPoint");
 
 //**********************************************************************************************************************
 //**********************************************************************************************************************
@@ -113,7 +114,8 @@ Game::Game(): Singleton<Game>(),
 	_bInLoop(false),
 	_bDebugDraw(false),
 	_window(nullptr),
-	_playerEntity(nullptr)
+	_playerEntity(nullptr),
+	isHost(false)
 {
 }
 
@@ -145,7 +147,7 @@ Enemy* Game::CreateLocalEnemy()
 	char tmp[256];
 	sprintf_s(tmp, sizeof(tmp), "enemy_%d", Game::_entity_id + 1);
 
-	uu::StringId const type = 0; //GetRandomEnemyType();
+	uu::StringId const type = GetRandomEnemyType();
 
 	Entity* entity;
 	entity = CreateLocalEntity(type, tmp);
@@ -463,6 +465,11 @@ void Game::_OnTimer(Game::Timer& timer)
 
 		timer.ReArm(Configuration::GetInstance()._timer_spawn_coin);
 	}
+	else if (_timer_refresh_point == timer._name)
+	{
+		scoringManager->sendScore(uu::Time::GetSynchTime());
+		timer.ReArm(Configuration::GetInstance()._timer_refresh_point);
+	}
 }
 
 //**********************************************************************************************************************
@@ -534,8 +541,15 @@ void Game::_OnEnterStateLobby()
 //**********************************************************************************************************************
 void Game::_OnEnterStateGame()
 {
-	//_AddTimer(_timer_spawn_enemy, Configuration::GetInstance()._timer_spawn_enemy);
+	_AddTimer(_timer_spawn_enemy, Configuration::GetInstance()._timer_spawn_enemy);
 	_AddTimer(_timer_spawn_coin, Configuration::GetInstance()._timer_spawn_coin);
+
+	if (isHost) {
+		//Log(LogType::eError, LogModule::eGame, true, "on passe par ici, et on repassera par là");
+		scoringManager = new ScoringManager();
+		_AddTimer(_timer_refresh_point, Configuration::GetInstance()._timer_refresh_point);
+	}
+		
 }
 
 //**********************************************************************************************************************
@@ -762,6 +776,8 @@ void Game::OnClientLeaveSession(SessionDescriptor const& descriptor, SessionClie
 // appel de la méthode appropriée
 bool Game::OnNetworkData(uu::u32 dataContainerId, void* bytes, int size, uu::network::IPEndPoint const& from_addr)
 {
+	//Log(LogType::eError, LogModule::eGame, true, "BAAAAAAAAAAHHHHHHHH%lu" , dataContainerId);
+
 	if (CreateEntityRequest::dataContainerId == dataContainerId)
 	{
 		_OnCreateEntityRequest(bytes, size, from_addr);
@@ -810,7 +826,19 @@ bool Game::OnNetworkData(uu::u32 dataContainerId, void* bytes, int size, uu::net
 		return true;
 	}
 
+	
 
+	if (UpdateScoreContainer::dataContainerId == dataContainerId)
+	{
+		_OnUpdateScoreContainer(bytes, size, from_addr);
+		return true;
+	}
+
+	if (KillEnemyContainer::dataContainerId == dataContainerId)
+	{
+		_OnKillEnemyContainer(bytes, size, from_addr);
+		return true;
+	}
 
 	return false;
 }
@@ -1002,6 +1030,42 @@ void Game::_OnHitObjectRequest(void* bytes, int size, uu::network::IPEndPoint co
 	}
 }
 
+void Game::_OnKillEnemyContainer(void* bytes, int size, uu::network::IPEndPoint const& from_addr)
+{
+	if (scoringManager != nullptr) {
+		Log(LogType::eTrace, LogModule::eGame, true, "OnKillEnemyContainer received from %s\n", from_addr.ToString());
+
+		uu::Reader reader(bytes, size, uu::Endianness::eNetworkEndian);
+		KillEnemyContainer request;
+
+		if (request.ReadFromNetworkData(reader, from_addr) == false)
+		{
+			return;
+		}
+		scoringManager->addHit(request._id_enemy, request._id_attacker, request._currenttime);
+	}
+}
+
+void Game::_OnUpdateScoreContainer(void* bytes, int size, uu::network::IPEndPoint const& from_addr)
+{
+	Log(LogType::eTrace, LogModule::eGame, true, "OnUpdateScoreContainer received from %s\n", from_addr.ToString());
+
+	uu::Reader reader(bytes, size, uu::Endianness::eNetworkEndian);
+	UpdateScoreContainer request;
+
+	if (request.ReadFromNetworkData(reader, from_addr) == false)
+	{
+		Log(LogType::eError, LogModule::eGame, true, "unable to read datacontainer OnUpdateScoreContainer\n");
+		return;
+	}
+
+	Player* entity = dynamic_cast<Player*>(GetEntity(request._id_player));
+	if (entity != nullptr)
+	{
+		entity->_score = request._score;
+	}
+}
+
 //**********************************************************************************************************************
 void Game::_OnUI(Widget& widget, sf::Event::MouseButtonEvent const& event)
 {
@@ -1010,6 +1074,7 @@ void Game::_OnUI(Widget& widget, sf::Event::MouseButtonEvent const& event)
 	if (&widget == &_create_session_button)
 	{
 		clean = _session_service.CreateSession();
+		isHost = true;
 	}
 	else
 	{
@@ -1308,6 +1373,12 @@ bool Game::SendDataContainerToSessionClients(uu::network::DataContainer& datacon
 {
 	return _session_service.SendDataContainerToSessionExclude(datacontainer, _session_service.GetCurrentSession(), _session_service.GetLocalSessionClient()._addr);
 }
+
+bool Game::BroadcastContainer(uu::network::DataContainer& datacontainer)
+{
+	return _session_service.SendDataContainerToSession(datacontainer, _session_service.GetCurrentSession(),true);
+}
+
 
 //**********************************************************************************************************************
 bool Game::SendDataContainer(uu::network::DataContainer& datacontainer, uu::network::IPEndPoint const& to_addr)

@@ -280,3 +280,54 @@ bool HitObjectRequest::WriteToNetworkData(uu::Writer& writer)
 
 	return true;
 }
+
+uu::StringId UpdateScoreContainer::dataContainerId = uu::StringId("UpdateScoreContainer");
+
+bool UpdateScoreContainer::ReadFromNetworkData(uu::Reader & reader, uu::network::IPEndPoint const & from_addr)
+{
+	if (_ReadDataContainerId(reader) == false) return false;
+
+	if (reader.ReadUInt32(_id_player) == false) return false;
+	if (reader.ReadUInt32(_score) == false) return false;
+
+	return true;
+}
+
+bool UpdateScoreContainer::WriteToNetworkData(uu::Writer& writer)
+{
+	if (_WriteDataContainerId(writer) == false) return false;
+
+	if (writer.WriteUInt32(_id_player) == false) return false;
+	if (writer.WriteUInt32(_score) == false) return false;
+
+	return true;
+}
+
+uu::StringId KillEnemyContainer::dataContainerId = uu::StringId("KillEnemyContainer");
+
+bool KillEnemyContainer::ReadFromNetworkData(uu::Reader & reader, uu::network::IPEndPoint const & from_addr)
+{
+	if (_ReadDataContainerId(reader) == false) return false;
+
+	if (reader.ReadUInt32(_id_attacker) == false) return false;
+	if (reader.ReadUInt32(_id_enemy) == false) return false;
+	if (reader.ReadInt64(_currenttime) == false) return false;
+
+	return true;
+}
+
+bool KillEnemyContainer::WriteToNetworkData(uu::Writer& writer)
+{
+	if (_WriteDataContainerId(writer) == false) return false;
+
+	if (writer.WriteUInt32(_id_attacker) == false) return false;
+	if (writer.WriteUInt32(_id_enemy) == false) return false;
+	if (writer.WriteInt64(_currenttime) == false) return false;
+
+	return true;
+}
+
+
+
+
+
