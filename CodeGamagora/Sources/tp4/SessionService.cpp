@@ -615,7 +615,7 @@ void ScoringManager::addHit(uu::u32 idNpc, uu::u32 idJoueur, time_t time)
 	//ajout quand le npc meurt
 	if (it == EnemiesHit.end())
 	{
-		DegatNPC dn(time + 450);
+		DegatNPC dn(time + 2000);
 		EnemiesHit[idNpc] = dn;
 		
 	}

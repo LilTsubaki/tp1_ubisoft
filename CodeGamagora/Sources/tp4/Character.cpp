@@ -413,8 +413,6 @@ void Character::Attack(uu::u32 id_to_attack)
 //**********************************************************************************************************************
 void Character::Hit(uu::u32 id_attacker, float hit_value)
 {
-	if (IsDead() == true)
-		return;
 
 	if (id_attacker == _id)
 		return;
@@ -422,6 +420,22 @@ void Character::Hit(uu::u32 id_attacker, float hit_value)
 	Entity* attacker = dynamic_cast<Entity*>(Game::GetInstance().GetEntity(id_attacker));
 	if (attacker == nullptr)
 		return;
+
+	if (IsDead() == true) {
+		if (attacker->IsMaster())
+		{
+			Enemy* enemy = dynamic_cast<Enemy*>(this);
+			KillEnemyContainer container;
+			container._id_attacker = id_attacker;
+			container._id_enemy = _id;
+			container._currenttime = uu::Time::GetSynchTime();
+			Game::GetInstance().BroadcastContainer(container);
+		}
+		return;
+	}
+		
+
+	
 
 	Log(LogType::eTrace, LogModule::eGame, true, "Character::Hit(%lu,%f): entity=%s\n", id_attacker, hit_value, ToString());
 
