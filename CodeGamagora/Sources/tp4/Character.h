@@ -20,6 +20,8 @@ public:
 		none,
 		idle,
 		moveto,
+		follow,
+		attack,
 		dead,
 	};
 
@@ -28,6 +30,9 @@ public:
 		float _speed;
 		float _power;
 		float _live;
+		float _view_range;
+		float _attack_range;
+		float _detect_range;
 	};
 
 public:
@@ -54,11 +59,22 @@ public:
 	virtual float GetPower() const { return _current_values._power; }
 	virtual void SetLive(float live) { _current_values._live = live; }
 	virtual float GetLive() const { return _current_values._live; }
+	virtual void SetViewRange(float view_range) { _current_values._view_range = view_range; }
+	virtual float GetViewRange() const { return _current_values._view_range; }
+	virtual void SetAttackRange(float attack_range) { _current_values._attack_range = attack_range; }
+	virtual float GetAttackRange() const { return _current_values._attack_range; }
+	virtual void SetDetectRange(float detect_range) { _current_values._detect_range = detect_range; }
+	virtual float GetDetectRange() const { return _current_values._detect_range; }
 
 	virtual bool IsNear(sf::Vector2f const& point, float distance) const;
+	bool IsInViewRange(sf::Vector2f const& point) const;
+	bool IsInAttackRange(sf::Vector2f const& point) const;
+	bool IsInDetectRange(sf::Vector2f const& point) const;
 
 	void GoTo(sf::Vector2f const& point) { GoTo(point.x, point.y); }
 	void GoTo(float x, float y);
+	void Follow(uu::u32 id_to_follow);
+	void Attack(uu::u32 id_to_attack);
 	void Hit(uu::u32 id_attacker, float hit_value);
 
 protected:
@@ -68,6 +84,9 @@ protected:
 	values_t _init_values;
 	values_t _current_values;
 
+	uu::u32 _entity_to_follow;
+	uu::u32 _entity_to_attack;
+
 	std::string _current_anim_name;
 	bool _current_anim_loop;
 
@@ -76,6 +95,8 @@ protected:
 
 	void _RefreshMoveTo(time_t time_now);
 	void _RefreshDead(time_t time_now);
+	void _RefreshFollow(time_t time_now);
+	void _RefreshAttack(time_t time_now);
 
 	//Entity overrides
 	virtual void ReadFromContainer(uu::network::DataContainer const& container);

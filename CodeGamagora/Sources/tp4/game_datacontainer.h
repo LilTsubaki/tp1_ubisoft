@@ -10,6 +10,7 @@
 
 //**********************************************************************************************************************
 /*
+
 DataContainer hierachy:
 
 DataContainer
@@ -18,28 +19,12 @@ DataContainer
 |	|		\____CreatePlayerRequest
 |	|		\____CreateEnemyRequest
 |	\____CreateBombRequest
+\____GotoObjectRequest
+\____FollowObjectRequest
+\____AttackObjectRequest
+\____HitObjectRequest
+
 */
-
-
-//**********************************************************************************************************************
-class MoveCharacterRequest : public uu::network::DataContainer
-{
-public:
-	static uu::StringId dataContainerId;
-
-public:
-	//uu::network::DataContainer overrides
-	virtual uu::StringId const& GetDataContainerId() const { return dataContainerId; }
-	virtual bool ReadFromNetworkData(uu::Reader& reader, uu::network::IPEndPoint const& from_addr);
-	virtual bool WriteToNetworkData(uu::Writer& writer);
-
-public:
-	uu::u32 _id;
-	float _x;
-	float _y;
-
-};
-
 
 //**********************************************************************************************************************
 class CreateEntityRequest: public uu::network::DataContainer
@@ -100,12 +85,30 @@ public:
 	virtual bool WriteToNetworkData(uu::Writer& writer);
 
 public:
+	uu::u32 _bomb_id;
+	uu::u32 _enemy_id;
 	uu::u32 _coins;
 
 };
 
 //**********************************************************************************************************************
-class CreateBombRequest : public uu::network::DataContainer
+class CreateEnemyRequest: public CreateCharacterRequest
+{
+public:
+	static uu::StringId dataContainerId;
+
+public:
+	//uu::network::DataContainer overrides
+	virtual uu::StringId const& GetDataContainerId() const { return dataContainerId; }
+	virtual bool ReadFromNetworkData(uu::Reader& reader, uu::network::IPEndPoint const& from_addr);
+	virtual bool WriteToNetworkData(uu::Writer& writer);
+
+public:
+
+};
+
+//**********************************************************************************************************************
+class CreateBombRequest: public CreateEntityRequest
 {
 public:
 	static uu::StringId dataContainerId;
@@ -118,8 +121,78 @@ public:
 
 public:
 	time_t _explosion_time;
-	float _x;
-	float _y;
+	float _explosion_radius;
+	float _current_radius;
+	float _power;
 
 };
 
+//**********************************************************************************************************************
+class GotoObjectRequest: public uu::network::DataContainer
+{
+public:
+	static uu::StringId dataContainerId;
+
+public:
+	//uu::network::DataContainer overrides
+	virtual uu::StringId const& GetDataContainerId() const { return dataContainerId; }
+	virtual bool ReadFromNetworkData(uu::Reader& reader, uu::network::IPEndPoint const& from_addr);
+	virtual bool WriteToNetworkData(uu::Writer& writer);
+
+public:
+	uu::u32 _id;
+	float _x;
+	float _y;
+};
+
+//**********************************************************************************************************************
+class FollowObjectRequest: public uu::network::DataContainer
+{
+public:
+	static uu::StringId dataContainerId;
+
+public:
+	//uu::network::DataContainer overrides
+	virtual uu::StringId const& GetDataContainerId() const { return dataContainerId; }
+	virtual bool ReadFromNetworkData(uu::Reader& reader, uu::network::IPEndPoint const& from_addr);
+	virtual bool WriteToNetworkData(uu::Writer& writer);
+
+public:
+	uu::u32 _id;
+	uu::u32 _id_to_follow;
+};
+
+//**********************************************************************************************************************
+class AttackObjectRequest: public uu::network::DataContainer
+{
+public:
+	static uu::StringId dataContainerId;
+
+public:
+	//uu::network::DataContainer overrides
+	virtual uu::StringId const& GetDataContainerId() const { return dataContainerId; }
+	virtual bool ReadFromNetworkData(uu::Reader& reader, uu::network::IPEndPoint const& from_addr);
+	virtual bool WriteToNetworkData(uu::Writer& writer);
+
+public:
+	uu::u32 _id_attacker;
+	uu::u32 _id_to_attack;
+};
+
+//**********************************************************************************************************************
+class HitObjectRequest: public uu::network::DataContainer
+{
+public:
+	static uu::StringId dataContainerId;
+
+public:
+	//uu::network::DataContainer overrides
+	virtual uu::StringId const& GetDataContainerId() const { return dataContainerId; }
+	virtual bool ReadFromNetworkData(uu::Reader& reader, uu::network::IPEndPoint const& from_addr);
+	virtual bool WriteToNetworkData(uu::Writer& writer);
+
+public:
+	uu::u32 _id_attacker;
+	uu::u32 _id_to_hit;
+	float _hit_value;
+};

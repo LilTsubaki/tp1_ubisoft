@@ -12,7 +12,6 @@ public:
 	virtual uu::StringId const& GetType() const { return type; }
 	virtual bool IsA(uu::StringId const& type) const { if (this->type == type) return true; return Item::IsA(type); }
 	virtual uu::network::DataContainer* CreateContainer() const;
-	virtual CreateBombRequest CreateContainerBis() const;
 
 public:
 	enum State
@@ -34,8 +33,6 @@ public:
 
 	bool IsInExplosionRange(sf::Vector2f const& point) const;
 
-	void setExplosionTime(time_t explosion_time);
-
 public:
 	Label _label;
 	State _state;
@@ -43,7 +40,6 @@ public:
 	float _explosion_radius;
 	float _current_radius;
 	float _power;
-	bool _time_set;
 
 protected:
 	bool _SetState(State new_state);

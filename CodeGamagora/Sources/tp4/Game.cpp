@@ -757,6 +757,9 @@ void Game::OnClientLeaveSession(SessionDescriptor const& descriptor, SessionClie
 }
 
 //**********************************************************************************************************************
+// Ici on recoit chaque paquet
+// filtrage par type
+// appel de la méthode appropriée
 bool Game::OnNetworkData(uu::u32 dataContainerId, void* bytes, int size, uu::network::IPEndPoint const& from_addr)
 {
 	if (CreateEntityRequest::dataContainerId == dataContainerId)
@@ -771,9 +774,9 @@ bool Game::OnNetworkData(uu::u32 dataContainerId, void* bytes, int size, uu::net
 		return true;
 	}
 
-	if (MoveCharacterRequest::dataContainerId == dataContainerId)
+	if (CreateEnemyRequest::dataContainerId == dataContainerId)
 	{
-		_OnMoveCharacterRequest(bytes, size, from_addr);
+		_OnCreateEnemyRequest(bytes, size, from_addr);
 		return true;
 	}
 
@@ -782,51 +785,35 @@ bool Game::OnNetworkData(uu::u32 dataContainerId, void* bytes, int size, uu::net
 		_OnCreateBombRequest(bytes, size, from_addr);
 		return true;
 	}
-	
+
+	if (GotoObjectRequest::dataContainerId == dataContainerId)
+	{
+		_OnGotoObjectRequest(bytes, size, from_addr);
+		return true;
+	}
+
+	if (FollowObjectRequest::dataContainerId == dataContainerId)
+	{
+		_OnFollowObjectRequest(bytes, size, from_addr);
+		return true;
+	}
+
+	if (AttackObjectRequest::dataContainerId == dataContainerId)
+	{
+		_OnAttackObjectRequest(bytes, size, from_addr);
+		return true;
+	}
+
+	if (HitObjectRequest::dataContainerId == dataContainerId)
+	{
+		_OnHitObjectRequest(bytes, size, from_addr);
+		return true;
+	}
+
+
 
 	return false;
 }
-
-//**********************************************************************************************************************
-void Game::_OnMoveCharacterRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr)
-{
-	Log(LogType::eTrace, LogModule::eGame, true, "MoveCharacterRequest received from %s\n", from_addr.ToString());
-
-	uu::Reader reader(bytes, size, uu::Endianness::eNetworkEndian);
-	MoveCharacterRequest request;
-
-	if (request.ReadFromNetworkData(reader, from_addr) == false)
-	{
-		Log(LogType::eError, LogModule::eGame, true, "unable to read datacontainer MoveCharacterRequest\n");
-		return;
-	}
-
-	Entity* ent = GetEntity(request._id);
-
-	Character* ch = dynamic_cast<Character*>(ent);
-	if (ch != nullptr)
-	{
-		ch->GoTo(request._x, request._y);
-	}
-}
-
-void Game::_OnCreateBombRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr){
-	Log(LogType::eTrace, LogModule::eGame, true, "CreateBombRequest received from %s\n", from_addr.ToString());
-
-	uu::Reader reader(bytes, size, uu::Endianness::eNetworkEndian);
-	CreateBombRequest request;
-
-	if (request.ReadFromNetworkData(reader, from_addr) == false)
-	{
-		Log(LogType::eError, LogModule::eGame, true, "unable to read datacontainer CreateBombRequest\n");
-		return;
-	}
-
-	Bomb* b = dynamic_cast<Bomb*>(Game::GetInstance().CreateLocalEntity(Bomb::type, "bomb"));
-	b->SetPosition(sf::Vector2f(request._x, request._y));
-	b->setExplosionTime(request._explosion_time);
-}
-
 
 //**********************************************************************************************************************
 void Game::_OnCreateEntityRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr)
@@ -867,35 +854,153 @@ void Game::_OnCreatePlayerRequest(void* bytes, int size, uu::network::IPEndPoint
 
 	uu::StringId const& type = GetKnownType(request._type);
 
-	Entity* entity = GetEntity(request._id);
-	if (entity == nullptr) {
-		entity = CreateNetworkEntity(type, request._name, request._id, request._owner);
-
-		if (entity != nullptr)
-		{
-			entity->ReadFromContainer(request);
-			entity->SetPosition(request._x, request._y);
-
-		}
-		for (std::list<Entity *>::iterator it = _entities.begin(); it != _entities.end(); ++it) {
-
-			DispatchCreateEntityToSessionClients(**it);
-		}
+	Entity* entity = CreateNetworkEntity(type, request._name, request._id, request._owner);
+	if (entity != nullptr)
+	{
+		entity->ReadFromContainer(request);
+		entity->SetPosition(request._x, request._y);
 	}
-	else {
-		if (entity != nullptr)
-		{
-			entity->ReadFromContainer(request);
-			entity->SetPosition(request._x, request._y);
-
-		}
-	}
-	
-	
-
-	
 }
 
+//**********************************************************************************************************************
+void Game::_OnCreateEnemyRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr)
+{
+	Log(LogType::eTrace, LogModule::eGame, true, "CreateEnemyRequest received from %s\n", from_addr.ToString());
+
+	uu::Reader reader(bytes, size, uu::Endianness::eNetworkEndian);
+	CreateEnemyRequest request;
+
+	if (request.ReadFromNetworkData(reader, from_addr) == false)
+	{
+		Log(LogType::eError, LogModule::eGame, true, "unable to read datacontainer CreateEnemyRequest\n");
+		return;
+	}
+
+	uu::StringId const& type = GetKnownType(request._type);
+
+	Entity* entity = CreateNetworkEntity(type, request._name, request._id, request._owner);
+	if (entity != nullptr)
+	{
+		entity->ReadFromContainer(request);
+		entity->SetPosition(request._x, request._y);
+	}
+}
+
+//**********************************************************************************************************************
+void Game::_OnCreateBombRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr)
+{
+	Log(LogType::eTrace, LogModule::eGame, true, "CreateBombRequest received from %s\n", from_addr.ToString());
+
+	uu::Reader reader(bytes, size, uu::Endianness::eNetworkEndian);
+	CreateBombRequest request;
+
+	if (request.ReadFromNetworkData(reader, from_addr) == false)
+	{
+		Log(LogType::eError, LogModule::eGame, true, "unable to read datacontainer CreateBombRequest\n");
+		return;
+	}
+
+	uu::StringId const& type = GetKnownType(request._type);
+
+	Entity* entity = CreateNetworkEntity(type, request._name, request._id, request._owner);
+	if (entity != nullptr)
+	{
+		entity->ReadFromContainer(request);
+		entity->SetPosition(request._x, request._y);
+	}
+}
+
+//**********************************************************************************************************************
+void Game::_OnGotoObjectRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr)
+{
+	Log(LogType::eTrace, LogModule::eGame, true, "GotoObjectRequest received from %s\n", from_addr.ToString());
+
+	uu::Reader reader(bytes, size, uu::Endianness::eNetworkEndian);
+	GotoObjectRequest request;
+
+	if (request.ReadFromNetworkData(reader, from_addr) == false)
+	{
+		Log(LogType::eError, LogModule::eGame, true, "unable to read datacontainer GotoObjectRequest\n");
+		return;
+	}
+
+	Entity* entity = GetEntity(request._id);
+	if (entity != nullptr)
+	{
+		Character* ch = dynamic_cast<Character*>(entity);
+		if (ch != nullptr)
+		{
+			ch->GoTo(request._x, request._y);
+		}
+	}
+}
+
+//**********************************************************************************************************************
+void Game::_OnFollowObjectRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr)
+{
+	Log(LogType::eTrace, LogModule::eGame, true, "FollowObjectRequest received from %s\n", from_addr.ToString());
+
+	uu::Reader reader(bytes, size, uu::Endianness::eNetworkEndian);
+	FollowObjectRequest request;
+
+	if (request.ReadFromNetworkData(reader, from_addr) == false)
+	{
+		Log(LogType::eError, LogModule::eGame, true, "unable to read datacontainer FollowObjectRequest\n");
+		return;
+	}
+
+	Entity* entity = GetEntity(request._id);
+	if (entity != nullptr)
+	{
+		Character* ch = dynamic_cast<Character*>(entity);
+		if (ch != nullptr)
+		{
+			ch->Follow(request._id_to_follow);
+		}
+	}
+}
+
+//**********************************************************************************************************************
+void Game::_OnAttackObjectRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr)
+{
+	Log(LogType::eTrace, LogModule::eGame, true, "AttackObjectRequest received from %s\n", from_addr.ToString());
+
+	uu::Reader reader(bytes, size, uu::Endianness::eNetworkEndian);
+	AttackObjectRequest request;
+
+	if (request.ReadFromNetworkData(reader, from_addr) == false)
+	{
+		Log(LogType::eError, LogModule::eGame, true, "unable to read datacontainer AttackObjectRequest\n");
+		return;
+	}
+
+	Character* entity = dynamic_cast<Character*>(GetEntity(request._id_attacker));
+	if (entity != nullptr)
+	{
+		entity->Attack(request._id_to_attack);
+	}
+}
+
+//**********************************************************************************************************************
+void Game::_OnHitObjectRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr)
+{
+	Log(LogType::eTrace, LogModule::eGame, true, "HitObjectRequest received from %s\n", from_addr.ToString());
+
+	uu::Reader reader(bytes, size, uu::Endianness::eNetworkEndian);
+	HitObjectRequest request;
+
+	if (request.ReadFromNetworkData(reader, from_addr) == false)
+	{
+		Log(LogType::eError, LogModule::eGame, true, "unable to read datacontainer HitObjectRequest\n");
+		return;
+	}
+
+	Character* entity = dynamic_cast<Character*>(GetEntity(request._id_to_hit));
+	if (entity != nullptr)
+	{
+		entity->Hit(request._id_attacker, request._hit_value);
+	}
+}
 
 //**********************************************************************************************************************
 void Game::_OnUI(Widget& widget, sf::Event::MouseButtonEvent const& event)
@@ -932,7 +1037,7 @@ void Game::_OnInputEvent(sf::Event& event, sf::RenderWindow& window)
 		{
 			if (_playerEntity != nullptr)
 			{
-				_playerEntity->SpawnLocalBomb();
+				/*Bomb* bomb =*/ _playerEntity->SpawnLocalBomb();
 			}
 		}
 		else if (event.key.code == sf::Keyboard::Key::I)
@@ -963,6 +1068,13 @@ void Game::_OnInputEvent(sf::Event& event, sf::RenderWindow& window)
 					if (_playerEntity != nullptr)
 					{
 						_playerEntity->GoTo(point);
+					}
+				}
+				else
+				{
+					if (_playerEntity != nullptr)
+					{
+						_playerEntity->Attack(selectedEntity->GetId());
 					}
 				}
 			}
@@ -1083,7 +1195,67 @@ Entity* Game::CreateLocalEntity(uu::StringId const& type, std::string const& nam
 	return entity;
 }
 
+//**********************************************************************************************************************
+void Game::DispatchLocalEntityGoTo(Character const& character, sf::Vector2f const& point)
+{
+	Log(LogType::eTrace, LogModule::eGame, true, "Game::DispatchLocalEntityGoTo(%f,%f): character=%s\n", point.x, point.y, character.ToString());
 
+	if (character.IsMaster() == false)
+	return;
+
+	GotoObjectRequest request;
+	request._id = character._id;
+	request._x = point.x;
+	request._y = point.y;
+
+	SendDataContainerToSessionClients(request);
+}
+
+//**********************************************************************************************************************
+void Game::DispatchLocalEntityFollow(Character const& character, uu::u32 id_to_follow)
+{
+	Log(LogType::eTrace, LogModule::eGame, true, "Game::DispatchLocalEntityFollow(%lu): character=%s\n", id_to_follow, character.ToString());
+
+	if (character.IsMaster() == false)
+		return;
+
+	FollowObjectRequest request;
+	request._id = character._id;
+	request._id_to_follow = id_to_follow;
+
+	SendDataContainerToSessionClients(request);
+}
+
+//**********************************************************************************************************************
+void Game::DispatchLocalEntityAttack(Character const& character, uu::u32 id_to_attack)
+{
+	Log(LogType::eTrace, LogModule::eGame, true, "Game::DispatchLocalEntityAttack(%lu): character=%s\n", id_to_attack, character.ToString());
+
+	if (character.IsMaster() == false)
+		return;
+
+	AttackObjectRequest request;
+	request._id_attacker = character._id;
+	request._id_to_attack = id_to_attack;
+
+	SendDataContainerToSessionClients(request);
+}
+
+//**********************************************************************************************************************
+void Game::DispatchLocalEntityHit(Character const& character, uu::u32 attacker, float hit_value)
+{
+	Log(LogType::eTrace, LogModule::eGame, true, "Game::DispatchLocalEntityAttack(%lu): character=%s\n", attacker, character.ToString());
+
+	if (character.IsMaster() == false)
+		return;
+
+	HitObjectRequest request;
+	request._id_attacker = attacker;
+	request._id_to_hit = character._id;
+	request._hit_value = hit_value;
+
+	SendDataContainerToSessionClients(request);
+}
 
 //**********************************************************************************************************************
 void Game::DispatchLocalEntitiesToClient(SessionClient const& client)

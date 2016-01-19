@@ -61,6 +61,11 @@ public:
 	bool SendDataContainerToSessionClients(uu::network::DataContainer& datacontainer);
 	bool SendDataContainer(uu::network::DataContainer& datacontainer, uu::network::IPEndPoint const& to_addr);
 
+	void DispatchLocalEntityGoTo(Character const& character, sf::Vector2f const& point);
+	void DispatchLocalEntityFollow(Character const& character, uu::u32 id_to_follow);
+	void DispatchLocalEntityAttack(Character const& character, uu::u32 id_to_attack);
+	void DispatchLocalEntityHit(Character const& character, uu::u32 attacker, float hit_value);
+
 	void DispatchLocalEntitiesToClient(SessionClient const& client);
 	void DispatchCreateEntityToClient(Entity const& entity, SessionClient const& client);
 	void DispatchCreateEntityToSessionClients(Entity const& entity);
@@ -94,9 +99,12 @@ protected:
 
 	void _OnCreateEntityRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr);
 	void _OnCreatePlayerRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr);
-	void _OnMoveCharacterRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr);
+	void _OnCreateEnemyRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr);
 	void _OnCreateBombRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr);
-	
+	void _OnGotoObjectRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr);
+	void _OnFollowObjectRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr);
+	void _OnAttackObjectRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr);
+	void _OnHitObjectRequest(void* bytes, int size, uu::network::IPEndPoint const& from_addr);
 
 	// SFML stuff
 	void _OnDraw(sf::RenderTarget& target);

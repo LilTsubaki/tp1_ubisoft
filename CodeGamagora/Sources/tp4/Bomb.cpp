@@ -2,7 +2,6 @@
 #include "draw_utils.h"
 #include "Game.h"
 #include "Time.h"
-#include "Log.h"
 
 //**********************************************************************************************************************
 Bomb::Bomb() : Item("Bomb"),
@@ -10,12 +9,11 @@ Bomb::Bomb() : Item("Bomb"),
 	_explosion_time(0),
 	_explosion_radius(0.f),
 	_current_radius(0.f),
-	_power(300.f),
-	_time_set(false)
+	_power(300.f)
 {
 	_current_radius = 10.f;
 	_explosion_radius = 150.f;
-	//_explosion_time = bomb_date + 4000; // TEMP : fix that for network latency handling
+	_explosion_time = uu::Time::GetSynchTime() + 4000;
 
 	_label.SetFontSize(14);
 	_label.SetStyle(sf::Text::Bold);
@@ -25,37 +23,33 @@ Bomb::Bomb() : Item("Bomb"),
 
 uu::network::DataContainer* Bomb::CreateContainer() const
 {
-	CreateBombRequest request;
-	request._explosion_time = _explosion_time;
-	sf::Vector2f pos;
-	GetPosition(pos);
-	request._x = pos.x;
-	request._y = pos.y;
-	return &request;
-}
-
-CreateBombRequest Bomb::CreateContainerBis() const
-{
-	CreateBombRequest request;
-	request._explosion_time = _explosion_time;
-	Log(LogType::eError, LogModule::eGame, true, "--------------coucou: %lu", request._explosion_time);
-	sf::Vector2f pos;
-	GetPosition(pos);
-	request._x = pos.x;
-	request._y = pos.y;
-	return request;
+	return new CreateBombRequest();
 }
 
 void Bomb::ReadFromContainer(uu::network::DataContainer const& container)
 {
 	Item::ReadFromContainer(container);
-	
+
+	CreateBombRequest const& data = dynamic_cast<CreateBombRequest const&>(container);
+
+	_current_radius = data._current_radius;
+	_explosion_radius = data._explosion_radius;
+	_explosion_time = data._explosion_time;
+	_current_radius = data._current_radius;
+	_power = data._power;
 }
 
 void Bomb::WriteToContainer(uu::network::DataContainer& container) const
 {
 	Item::WriteToContainer(container);
-	
+
+	CreateBombRequest& data = dynamic_cast<CreateBombRequest&>(container);
+
+	data._current_radius = _current_radius;
+	data._explosion_radius = _explosion_radius;
+	data._explosion_time = _explosion_time;
+	data._current_radius = _current_radius;
+	data._power = _power;
 }
 
 bool Bomb::_SetState(State new_state)
@@ -109,18 +103,15 @@ bool Bomb::Update(time_t time_now)
 
 void Bomb::_RefreshTicks(time_t time_now)
 {
-	if (_time_set) {
-		float timeToExplosion = ((long)_explosion_time - (long)time_now) / 1000.f;
+	float timeToExplosion = (_explosion_time - time_now) / 1000.f;
 
-		if (timeToExplosion > 0.f)
-		{
-			_label.SetText("%.02f ", timeToExplosion);
-			//_label.SetText("%i", time_now);
-		}
-		else
-		{
-			_SetState(explode);
-		}
+	if (timeToExplosion > 0.f)
+	{
+		_label.SetText("%.02f", timeToExplosion);
+	}
+	else
+	{
+		_SetState(explode);
 	}
 }
 
@@ -198,10 +189,4 @@ bool Bomb::IsInExplosionRange(sf::Vector2f const& point) const
 	ellipse._radius *= _current_radius;
 
 	return (ellipse.IsPointInside(point));
-}
-
-void Bomb::setExplosionTime(time_t explosion_time)
-{
-	_explosion_time = explosion_time;
-	_time_set = true;
 }

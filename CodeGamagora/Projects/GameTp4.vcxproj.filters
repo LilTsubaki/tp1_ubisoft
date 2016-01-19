@@ -80,6 +80,9 @@
     <ClCompile Include="..\Sources\tp4\Character.cpp">
       <Filter>Game\Characters</Filter>
     </ClCompile>
+    <ClCompile Include="..\Sources\tp4\Bomb.cpp">
+      <Filter>Game\Characters</Filter>
+    </ClCompile>
     <ClCompile Include="..\Sources\tp4\Player.cpp">
       <Filter>Game\Characters</Filter>
     </ClCompile>
@@ -93,9 +96,6 @@
       <Filter>Game\Characters</Filter>
     </ClCompile>
     <ClCompile Include="..\Sources\tp4\Entity.cpp">
-      <Filter>Game\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Sources\tp4\Bomb.cpp">
       <Filter>Game\Characters</Filter>
     </ClCompile>
   </ItemGroup>
@@ -193,6 +193,9 @@
     <ClInclude Include="..\Sources\tp4\Character.h">
       <Filter>Game\Characters</Filter>
     </ClInclude>
+    <ClInclude Include="..\Sources\tp4\Bomb.h">
+      <Filter>Game\Characters</Filter>
+    </ClInclude>
     <ClInclude Include="..\Sources\tp4\Player.h">
       <Filter>Game\Characters</Filter>
     </ClInclude>
@@ -206,9 +209,6 @@
       <Filter>Game\Characters</Filter>
     </ClInclude>
     <ClInclude Include="..\Sources\tp4\Item.h">
-      <Filter>Game\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sources\tp4\Bomb.h">
       <Filter>Game\Characters</Filter>
     </ClInclude>
   </ItemGroup>

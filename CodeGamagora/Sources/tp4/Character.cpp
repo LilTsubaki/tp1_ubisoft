@@ -17,11 +17,16 @@ uu::StringId Character::type = uu::StringId("Character");
 //**********************************************************************************************************************
 Character::Character(const char* name):
 	Animable(name),
-	_state(none)
+	_state(none),
+	_entity_to_follow(0),
+	_entity_to_attack(0)
 {
 	_init_values._speed = 1.0f;
 	_init_values._power = 10.f;
 	_init_values._live = 100.f;
+	_init_values._view_range = 200.f;
+	_init_values._attack_range = 40.f;
+	_init_values._detect_range = 200.f;
 
 	_current_values = _init_values;
 
@@ -53,6 +58,11 @@ void Character::ReadFromContainer(uu::network::DataContainer const& container)
 	_current_values._speed = data._speed;
 	_current_values._power = data._power;
 	_current_values._live = data._live;
+	_current_values._view_range = data._view_range;
+	_current_values._attack_range = data._attack_range;
+	_current_values._detect_range = data._detect_range;
+	_entity_to_follow = data._entity_to_follow;
+	_entity_to_attack = data._entity_to_attack;
 }
 
 //**********************************************************************************************************************
@@ -65,7 +75,11 @@ void Character::WriteToContainer(uu::network::DataContainer& container) const
 	data._speed = _current_values._speed;
 	data._power = _current_values._power;
 	data._live = _current_values._live;
-
+	data._view_range = _current_values._view_range;
+	data._attack_range = _current_values._attack_range;
+	data._detect_range = _current_values._detect_range;
+	data._entity_to_follow = _entity_to_follow;
+	data._entity_to_attack = _entity_to_attack;
 }
 
 //**********************************************************************************************************************
@@ -74,7 +88,9 @@ void Character::SetValues(float speed, float power, float live, float view_range
 	_current_values._speed = speed;
 	_current_values._power = power;
 	_current_values._live = live;
-
+	_current_values._view_range = view_range;
+	_current_values._attack_range = attack_range;
+	_current_values._detect_range = detect_range;
 }
 
 //**********************************************************************************************************************
@@ -96,6 +112,8 @@ bool Character::Update(time_t time_now)
 	{
 	case idle:									break;
 	case moveto:	_RefreshMoveTo(time_now);	break;
+	case follow:	_RefreshFollow(time_now);	break;
+	case attack:	_RefreshAttack(time_now);	break;
 	case dead:		_RefreshDead(time_now);		break;
 	default:									break;
 	}
@@ -133,7 +151,12 @@ bool Character::_SetState(State new_state)
 			break;
 
 			case moveto:
+			case follow:
 				_current_anim_name = "go";		_current_anim_loop = true;
+			break;
+
+			case attack:
+				_current_anim_name = "attack";	_current_anim_loop = false;
 			break;
 
 			case dead:
@@ -166,6 +189,75 @@ void Character::_RefreshMoveTo(time_t time_now)
 	if (uu::maths::Vector2Distance(_position, _target) <= 1.5f)
 	{
 		_SetState(idle);
+		return;
+	}
+
+	_position += ((_orientation) * _current_values._speed);
+
+	_current_anim_name = "go";	_current_anim_loop = true;
+}
+
+//**********************************************************************************************************************
+void Character::_RefreshFollow(time_t time_now)
+{
+	if (_entity_to_follow == 0)
+	{
+		_SetState(idle);
+		return;
+	}
+
+	Entity* entity = Game::GetInstance().GetEntity(_entity_to_follow);
+	if (entity == nullptr)
+	{
+		_entity_to_follow = 0;
+		_SetState(idle);
+		return;
+	}
+
+	entity->GetPosition(_target);
+
+	if (IsInAttackRange(_target) == true)
+	{
+		_target = _position;
+		_current_anim_name = "idle";	_current_anim_loop = true;
+		return;
+	}
+
+	_position += ((_orientation) * _current_values._speed);
+
+	_current_anim_name = "go";	_current_anim_loop = true;
+}
+
+//**********************************************************************************************************************
+void Character::_RefreshAttack(time_t time_now)
+{
+	if (_entity_to_attack == 0)
+	{
+		_SetState(idle);
+		return;
+	}
+
+	Character* entity = dynamic_cast<Character*>(Game::GetInstance().GetEntity(_entity_to_attack));
+	if (entity == nullptr)
+	{
+		_entity_to_attack = 0;
+		_SetState(idle);
+		return;
+	}
+
+	entity->GetPosition(_target);
+
+	if (IsInAttackRange(_target) == true)
+	{
+		if (_current_anim_name == "attack" && _sprite.IsAnimationEnded())
+		{
+			entity->Hit(GetId(), _current_values._power);
+			_entity_to_attack = 0;
+			_SetState(idle);
+			return;
+		}
+
+		_current_anim_name = "attack";	_current_anim_loop = false;
 		return;
 	}
 
@@ -255,20 +347,66 @@ void Character::GoTo(float x, float y)
 
 	Log(LogType::eTrace, LogModule::eGame, true, "Character::GoTo(%f,%f): entity=%s\n", x, y, ToString());
 
+	_entity_to_follow = 0;
+	_entity_to_attack = 0;
 	_target.x = x;	_target.y = y;
 
 	_SetState(moveto);
 
 	if (IsMaster())
 	{
-		MoveCharacterRequest request;
-		request._id = _id;
-		request._x = x;
-		request._y = y;
-
-		BroadcastDataContainerToReplicas(request);
+		Game::GetInstance().DispatchLocalEntityGoTo(*this, _target);
 	}
+}
 
+//**********************************************************************************************************************
+void Character::Follow(uu::u32 id_to_follow)
+{
+	if (IsDead() == true)
+		return;
+
+	if (id_to_follow == _id)
+		return;
+
+	_entity_to_attack = 0;
+	_entity_to_follow = id_to_follow;
+
+	if (_entity_to_follow != 0)
+	{
+		Log(LogType::eTrace, LogModule::eGame, true, "Character::Follow(%lu): entity=%s\n", id_to_follow, ToString());
+
+		_SetState(follow);
+
+		if (IsMaster())
+		{
+			Game::GetInstance().DispatchLocalEntityFollow(*this, _entity_to_follow);
+		}
+	}
+}
+
+//**********************************************************************************************************************
+void Character::Attack(uu::u32 id_to_attack)
+{
+	if (IsDead() == true)
+		return;
+
+	if (id_to_attack == _id)
+		return;
+
+	_entity_to_follow = 0;
+	_entity_to_attack = id_to_attack;
+
+	if (_entity_to_attack != 0)
+	{
+		Log(LogType::eTrace, LogModule::eGame, true, "Character::Attack(%lu): entity=%s\n", id_to_attack, ToString());
+
+		_SetState(attack);
+
+		if (IsMaster())
+		{
+			Game::GetInstance().DispatchLocalEntityAttack(*this, _entity_to_attack);
+		}
+	}
 }
 
 //**********************************************************************************************************************
@@ -285,6 +423,11 @@ void Character::Hit(uu::u32 id_attacker, float hit_value)
 		return;
 
 	Log(LogType::eTrace, LogModule::eGame, true, "Character::Hit(%lu,%f): entity=%s\n", id_attacker, hit_value, ToString());
+
+	if (attacker->IsMaster())
+	{
+		Game::GetInstance().DispatchLocalEntityHit(*this, id_attacker, hit_value);
+	}
 
 	_current_values._live -= hit_value;
 	if (_current_values._live <= 0)
@@ -304,6 +447,33 @@ bool Character::IsNear(sf::Vector2f const& point, float distance) const
 }
 
 //**********************************************************************************************************************
+bool Character::IsInViewRange(sf::Vector2f const& point) const
+{
+	if (IsDead() == true)
+		return false;
+
+	return IsNear(point, _current_values._view_range);
+}
+
+//**********************************************************************************************************************
+bool Character::IsInAttackRange(sf::Vector2f const& point) const
+{
+	if (IsDead() == true)
+		return false;
+
+	return IsNear(point, _current_values._attack_range);
+}
+
+//**********************************************************************************************************************
+bool Character::IsInDetectRange(sf::Vector2f const& point) const
+{
+	if (IsDead() == true)
+		return false;
+
+	return IsNear(point, _current_values._detect_range);
+}
+
+//**********************************************************************************************************************
 Enemy::Enemy(const char* name) : Character(name)
 {
 	_init_values._speed = 0.8f;
@@ -311,7 +481,7 @@ Enemy::Enemy(const char* name) : Character(name)
 
 uu::network::DataContainer* Enemy::CreateContainer() const
 {
-	return NULL;
+	return new CreateEnemyRequest();
 }
 
 //**********************************************************************************************************************
