@@ -935,6 +935,9 @@ void Game::_OnCreateBombRequest(void* bytes, int size, uu::network::IPEndPoint c
 	{
 		entity->ReadFromContainer(request);
 		entity->SetPosition(request._x, request._y);
+		Entity* p = Game::GetInstance().GetEntity(request._idPlayer);
+		Player* player = dynamic_cast<Player*>(p);
+		player->setBombId(request._id);
 	}
 }
 
@@ -1048,7 +1051,7 @@ void Game::_OnKillEnemyContainer(void* bytes, int size, uu::network::IPEndPoint 
 
 void Game::_OnUpdateScoreContainer(void* bytes, int size, uu::network::IPEndPoint const& from_addr)
 {
-	Log(LogType::eTrace, LogModule::eGame, true, "OnUpdateScoreContainer received from %s\n", from_addr.ToString());
+	Log(LogType::eError, LogModule::eGame, true, "OnUpdateScoreContainer received from %s\n", from_addr.ToString());
 
 	uu::Reader reader(bytes, size, uu::Endianness::eNetworkEndian);
 	UpdateScoreContainer request;

@@ -28,6 +28,7 @@ public:
 	void    InvokeLocalCreature();
 	Bomb*   SpawnLocalBomb();
 	uu::u32 getBombId() { return _bomb_id; }
+	void setBombId(uu::u32 id) { _bomb_id = id }
 
 protected:
 	uu::u32 _bomb_id;

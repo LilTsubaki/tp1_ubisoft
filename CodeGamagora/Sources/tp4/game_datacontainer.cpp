@@ -152,6 +152,7 @@ bool CreateBombRequest::ReadFromNetworkData(uu::Reader& reader, uu::network::IPE
 	if (reader.ReadFloat(_explosion_radius) == false) return false;
 	if (reader.ReadFloat(_current_radius) == false) return false;
 	if (reader.ReadFloat(_power) == false) return false;
+	if (reader.ReadUInt32(_idPlayer) == false) return false;
 
 	Log(LogType::eTrace, LogModule::eDataContainer, true, "CreateBombRequest::ReadFromNetworkData _owner=%s\n", _owner.ToString());
 
@@ -167,6 +168,7 @@ bool CreateBombRequest::WriteToNetworkData(uu::Writer& writer)
 	if (writer.WriteFloat(_explosion_radius) == false) return false;
 	if (writer.WriteFloat(_current_radius) == false) return false;
 	if (writer.WriteFloat(_power) == false) return false;
+	if (writer.WriteUInt32(_idPlayer) == false) return false;
 
 	Log(LogType::eTrace, LogModule::eDataContainer, true, "CreateBombRequest::WriteToNetworkData _owner=%s\n", _owner.ToString());
 
