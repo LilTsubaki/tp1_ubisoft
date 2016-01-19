@@ -47,7 +47,7 @@ Configuration::Configuration(): Singleton<Configuration>()
 	// game area size
 	_area_width = 720;
 	_area_height = (uu::u32)(_area_width * 0.75f);
-	_timer_spawn_enemy = 3000;	// 30secs
+	_timer_spawn_enemy = 7000;	// 30secs
 	_timer_spawn_coin = 30000;	// 30secs
 	_timer_refresh_point = 500; // 0.5sec
 }
@@ -607,8 +607,11 @@ void ScoringManager::sendScore(time_t currentTime)
 void ScoringManager::addHit(uu::u32 idNpc, uu::u32 idJoueur, time_t time)
 {
 	std::map<uu::u32, DegatNPC>::iterator it;
-	it = EnemiesHit.find(idNpc);
+	if (!EnemiesHit.size() == 0)
+		it = EnemiesHit.find(idNpc);
 
+	else
+		it = EnemiesHit.end();
 	//ajout quand le npc meurt
 	if (it == EnemiesHit.end())
 	{

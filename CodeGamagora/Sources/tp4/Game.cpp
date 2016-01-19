@@ -545,7 +545,7 @@ void Game::_OnEnterStateGame()
 	_AddTimer(_timer_spawn_coin, Configuration::GetInstance()._timer_spawn_coin);
 
 	if (isHost) {
-		//Log(LogType::eError, LogModule::eGame, true, "on passe par ici, et on repassera par là");
+		Log(LogType::eError, LogModule::eGame, true, "on passe par ici, et on repassera par là");
 		scoringManager = new ScoringManager();
 		_AddTimer(_timer_refresh_point, Configuration::GetInstance()._timer_refresh_point);
 	}
@@ -1032,8 +1032,8 @@ void Game::_OnHitObjectRequest(void* bytes, int size, uu::network::IPEndPoint co
 
 void Game::_OnKillEnemyContainer(void* bytes, int size, uu::network::IPEndPoint const& from_addr)
 {
-	if (scoringManager != nullptr) {
-		Log(LogType::eTrace, LogModule::eGame, true, "OnKillEnemyContainer received from %s\n", from_addr.ToString());
+	if (isHost) {
+		Log(LogType::eError, LogModule::eGame, true, "OnKillEnemyContainer received from %s\n", from_addr.ToString());
 
 		uu::Reader reader(bytes, size, uu::Endianness::eNetworkEndian);
 		KillEnemyContainer request;
