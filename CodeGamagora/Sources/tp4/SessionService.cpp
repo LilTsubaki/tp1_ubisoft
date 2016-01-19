@@ -580,8 +580,18 @@ bool DegatNPC::sendScore(time_t currentTime)
 
 void DegatNPC::addJoueur(uu::u32 id, time_t time)
 {
-	if(time < timeOut)
+	if(time < timeOut && !contains(id))
 		idJoueur.push_back(id);
+}
+
+bool DegatNPC::contains(uu::u32 id)
+{
+	for (int i = 0; i < idJoueur.size(); i++)
+	{
+		if (idJoueur[i] == id)
+			return true;
+	}
+	return false;
 }
 
 void ScoringManager::sendScore(time_t currentTime)
